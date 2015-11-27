@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/menu/main.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/menu/main.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/menu/global.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/menu/global.xml"
+    }
+]

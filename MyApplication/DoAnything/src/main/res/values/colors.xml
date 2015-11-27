@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background color of action bars. Ensure this stays in sync with packages/Telephony
+         actionbar_background_color. -->
+    <color name="actionbar_background_color">@android:color/holo_red_light</color>
+    <color name="actionbar_title_color">#ffffff</color>
+    <color name="viewtab_background_color">@android:color/background_light</color>
+    <color name="tab_text_color">@android:color/holo_red_light</color>
+    <color name="tab_text_color_selected">@android:color/holo_red_light</color>
+    <color name="tab_selected_underline_color">@color/tab_text_color</color>
+    <color name="text_color">#aaa</color>
+
+    <color name="sub_background_color">#33999999</color>
+    <color name="sub_text_color">#ff000000</color>
+    <color name="sub_text_color_selected">#ffff4444</color>
+</resources>

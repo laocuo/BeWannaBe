@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_drawer.png",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable-mdpi/ic_drawer.png"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable-mdpi-v4/drawer_shadow.9.png",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable-mdpi/drawer_shadow.9.png"
+    }
+]

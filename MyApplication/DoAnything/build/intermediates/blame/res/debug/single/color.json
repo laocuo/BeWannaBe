@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/color/tabpager_item_textcolor.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/color/tabpager_item_textcolor.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/color/drawer_list_item_textcolor.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/color/drawer_list_item_textcolor.xml"
+    }
+]

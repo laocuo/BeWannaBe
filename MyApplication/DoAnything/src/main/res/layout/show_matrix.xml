@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <ImageView 
+        android:id="@+id/iv1_sm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/sample_0"
+        android:visibility="gone" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center">
+        <Button 
+            android:id="@+id/bt1_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bt1"/>
+        <Button 
+            android:id="@+id/bt2_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bt2"/>
+        <Button 
+            android:id="@+id/bt3_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bt3"/>
+        <Button 
+            android:id="@+id/bt4_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bt4"/>
+        <Button 
+            android:id="@+id/bt5_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bt5"/>
+    </LinearLayout>
+    <RelativeLayout 
+        android:id="@+id/iv_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView 
+            android:id="@+id/iv2_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="matrix"
+            android:layout_centerInParent="true"
+            android:src="@drawable/wp_0001" />
+    </RelativeLayout>
+
+</LinearLayout>

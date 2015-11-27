@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.example.tsdf.view.CustomizedView.CustomHorizontalScrollView 
+        android:id="@+id/gallery_matrix_view"
+        android:layout_width="240dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center" >
+        <LinearLayout 
+            android:id="@+id/gallery_matrix_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            
+        </LinearLayout>
+    </com.example.tsdf.view.CustomizedView.CustomHorizontalScrollView>
+
+</LinearLayout>

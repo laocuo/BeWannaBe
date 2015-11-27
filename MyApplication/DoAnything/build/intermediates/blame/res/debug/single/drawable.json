@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable/selected_tip.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable/selected_tip.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable/drawer_list_item_background.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable/drawer_list_item_background.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable/btn_selector.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable/btn_selector.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/drawable/unselected_tip.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/drawable/unselected_tip.xml"
+    }
+]
