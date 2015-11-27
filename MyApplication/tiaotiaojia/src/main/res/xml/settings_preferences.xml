@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="common settings" android:key="pref_key_settings">
+        <CheckBoxPreference android:title="Computer" android:summary="vs computer?" android:key="pref_key_vs_com"/>
+        <ListPreference android:key="pref_key_com_difficulty" android:title="Select com difficulty" android:entryValues="@array/pref_key_com_difficulty_values" android:entries="@array/pref_key_com_difficulty_choices"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="audio settings" android:key="pref_key_audio_settings">
+        <CheckBoxPreference android:key="pref_key_audio_open" android:summary="open audio?" android:title="Audio"/>
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>
