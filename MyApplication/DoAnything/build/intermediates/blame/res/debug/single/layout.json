@@ -32,12 +32,12 @@
         "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/layout/power_calculator.xml"
     },
     {
-        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/layout/power_calculator_list_item.xml",
-        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/layout/power_calculator_list_item.xml"
-    },
-    {
         "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/layout/power_calculator_list_head_item.xml",
         "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/layout/power_calculator_list_head_item.xml"
+    },
+    {
+        "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/layout/power_calculator_list_item.xml",
+        "source": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/src/main/res/layout/power_calculator_list_item.xml"
     },
     {
         "merged": "/home/administrator/Code/AS_project/BeWannaBe/MyApplication/DoAnything/build/intermediates/res/merged/debug/layout/splash.xml",
