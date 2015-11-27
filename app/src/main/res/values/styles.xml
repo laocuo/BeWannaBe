@@ -1,0 +1,104 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <!-- My Application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:actionBarStyle">@style/DiyActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/DiyActionBarOverflow</item>
+    </style>
+
+    <style name="DiyActionBarOverflow"
+           parent="@android:style/Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_menu_overflow_light</item>
+    </style>
+
+    <style name="DiyActionBar" parent="@android:style/Widget.ActionBar">
+        <item name="android:background">@color/actionbar_background_color</item>
+        <item name="android:displayOptions">useLogo|showTitle</item>
+        <item name="android:titleTextStyle">@style/actionBar_titleStyle</item>
+        <item name="android:subtitleTextStyle">@style/actionBar_subtitleStyle</item>
+    </style>
+
+    <style name="NotitleTheme" parent="AppTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="actionBar_titleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionbar_title_color</item>
+    </style>
+    <style name="actionBar_subtitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/actionbar_title_color</item>
+    </style>
+
+    <style name="PopupAnimation" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+
+    <style name="SlideAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_enter</item>
+        <item name="android:windowExitAnimation">@anim/slide_exit</item>
+    </style>
+
+    <style name="RotateAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/rotate_enter</item>
+        <item name="android:windowExitAnimation">@anim/rotate_exit</item>
+    </style>
+
+    <style name="common_btn_style">
+        <item name="android:layout_width">54dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="common_btn_style_big">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="common_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="common_title_2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">#ffff4444</item>
+        <item name="android:shadowRadius">3.0</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="common_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--
+         Per the design guidelines, navigation drawers should be between 240dp and 320dp:
+         https://developer.android.com/design/patterns/navigation-drawer.html
+    -->
+    <dimen name="navigation_drawer_width">240dp</dimen>
+
+    <!-- Height of the selection indicator of a tab. -->
+    <dimen name="tab_selected_underline_height">2dp</dimen>
+
+    <dimen name="tab_height">43dp</dimen>
+
+    <!-- Size of text in tabs. -->
+    <dimen name="tab_text_size">14sp</dimen>
+    <dimen name="tab_elevation">2dp</dimen>
+
+    <dimen name="head_tips_size">10sp</dimen>
+    <dimen name="last_updated_size">10sp</dimen>
+</resources>

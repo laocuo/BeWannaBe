@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.amaker.mdm.app"
+      android:versionCode="1"
+      android:versionName="1.0">
+
+    
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    
+        <activity android:name=".MDMActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+		<receiver android:name="MDMReceiver" android:priority="1">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+			</intent-filter>
+		</receiver>
+		
+		<service android:name="MDMService">
+			<intent-filter>
+				<action android:name="com.amaker.mdm.app.action.MDMService"/>
+			</intent-filter>
+		</service>
+		
+		<activity android:name="com.amaker.mdm.lock.MDMLockActivity">
+		</activity>
+	
+		<receiver android:name="com.amaker.mdm.lock.MDMLockLisnter">
+		</receiver>
+
+		<receiver android:name="com.amaker.mdm.app.callctl">
+		</receiver>
+		
+		<receiver android:name="com.amaker.mdm.app.smsctl">
+		</receiver>
+		
+    	<provider android:name="com.amaker.mdm.cp.EmployeeProvider" android:authorities="com.amaker.mdm.provider.Employees"/>
+	
+</application>
+
+	<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+	<uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+	
+
+<uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+
+<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+<uses-permission android:name="android.permission.CALL_PRIVILEGED"></uses-permission>
+<uses-permission android:name="android.permission.SEND_SMS"/>
+<uses-permission android:name="android.permission.RECEIVE_SMS"/>
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
+
+<uses-permission android:name="android.permission.CAMERA"></uses-permission>
+</manifest> 

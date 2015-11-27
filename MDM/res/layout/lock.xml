@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout android:id="@+id/FrameLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" android:background="@drawable/bg">
+
+<com.amaker.mdm.lock.MDMLockView
+	android:id="@+id/lockview"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+/>
+                
+<RelativeLayout android:id="@+id/RelativeLayout01" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"><TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:layout_marginTop="50px" android:text="Screen is Locked!" android:textSize="32.0dip" android:id="@+id/locktext"></TextView>
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/unlock_image" android:layout_centerHorizontal="true" android:layout_below="@+id/locktext" android:layout_marginTop="20.0dip" android:src="@drawable/p1"></ImageView>
+
+
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/redstar" android:id="@+id/StartImage" android:layout_below="@+id/unlock_image" android:layout_alignParentLeft="true" android:layout_marginLeft="30.0dp" android:layout_marginTop="80.0dip"></ImageView>
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/greenstar" android:id="@+id/EndImage" android:layout_below="@+id/unlock_image" android:layout_alignParentRight="true" android:layout_marginRight="30.0dp" android:layout_marginTop="80.0dp"></ImageView>
+
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ScrolImage" android:src="@drawable/yellowstar" android:layout_toRightOf="@+id/StartImage" android:layout_below="@+id/unlock_image" android:layout_marginTop="80.0dp"></ImageView>
+
+</RelativeLayout>
+</FrameLayout>
