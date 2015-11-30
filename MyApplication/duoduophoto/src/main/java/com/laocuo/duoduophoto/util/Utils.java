@@ -32,63 +32,61 @@ import java.util.ArrayList;
  * Class containing some static utility methods.
  */
 public class Utils {
-  public static final int IO_BUFFER_SIZE = 8 * 1024;
-  private static final String PHOTO_PATH = "duoduophoto";
-//  private static final String PHOTO_PATH = "Pictures/Camera Roll";
-//  private static final String PHOTO_PATH = "DCIM/Camera";
+    public static final int IO_BUFFER_SIZE = 8 * 1024;
+    private static final String PHOTO_PATH = "DCIM/Camera";
 
-  private Utils() {
-  };
+    private Utils() {
+    };
 
-  /**
-   * Workaround for bug pre-Froyo, see here for more info:
-   * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-   */
-  public static void disableConnectionReuseIfNecessary() {
+    /**
+    * Workaround for bug pre-Froyo, see here for more info:
+    * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+    */
+    public static void disableConnectionReuseIfNecessary() {
     // HTTP connection reuse which was buggy pre-froyo
     if (hasHttpConnectionBug()) {
       System.setProperty("http.keepAlive", "false");
     }
-  }
+    }
 
-  /**
-   * Get the size in bytes of a bitmap.
-   * 
-   * @param bitmap
-   * @return size in bytes
-   */
-  @SuppressLint("NewApi")
-  public static int getBitmapSize(Bitmap bitmap) {
+    /**
+    * Get the size in bytes of a bitmap.
+    *
+    * @param bitmap
+    * @return size in bytes
+    */
+    @SuppressLint("NewApi")
+    public static int getBitmapSize(Bitmap bitmap) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
       return bitmap.getByteCount();
     }
     // Pre HC-MR1
     return bitmap.getRowBytes() * bitmap.getHeight();
-  }
+    }
 
-  /**
-   * Check if external storage is built-in or removable.
-   * 
-   * @return True if external storage is removable (like an SD card), false
-   *         otherwise.
-   */
-  @SuppressLint("NewApi")
-  public static boolean isExternalStorageRemovable() {
+    /**
+    * Check if external storage is built-in or removable.
+    *
+    * @return True if external storage is removable (like an SD card), false
+    *         otherwise.
+    */
+    @SuppressLint("NewApi")
+    public static boolean isExternalStorageRemovable() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
       return Environment.isExternalStorageRemovable();
     }
     return true;
-  }
+    }
 
-  /**
-   * Get the external app cache directory.
-   * 
-   * @param context
-   *          The context to use
-   * @return The external cache dir
-   */
-  @SuppressLint("NewApi")
-  public static File getExternalCacheDir(Context context) {
+    /**
+    * Get the external app cache directory.
+    *
+    * @param context
+    *          The context to use
+    * @return The external cache dir
+    */
+    @SuppressLint("NewApi")
+    public static File getExternalCacheDir(Context context) {
     if (hasExternalCacheDir()) {
       return context.getExternalCacheDir();
     }
@@ -98,66 +96,66 @@ public class Utils {
         + "/cache/";
     return new File(Environment.getExternalStorageDirectory().getPath()
         + cacheDir);
-  }
+    }
 
-  /**
-   * Check how much usable space is available at a given path.
-   * 
-   * @param path
-   *          The path to check
-   * @return The space available in bytes
-   */
-  @SuppressLint("NewApi")
-  public static long getUsableSpace(File path) {
+    /**
+    * Check how much usable space is available at a given path.
+    *
+    * @param path
+    *          The path to check
+    * @return The space available in bytes
+    */
+    @SuppressLint("NewApi")
+    public static long getUsableSpace(File path) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
       return path.getUsableSpace();
     }
     final StatFs stats = new StatFs(path.getPath());
     return (long) stats.getBlockSize()
         * (long) stats.getAvailableBlocks();
-  }
+    }
 
-  /**
-   * Get the memory class of this device (approx. per-app memory limit)
-   * 
-   * @param context
-   * @return
-   */
-  public static int getMemoryClass(Context context) {
+    /**
+    * Get the memory class of this device (approx. per-app memory limit)
+    *
+    * @param context
+    * @return
+    */
+    public static int getMemoryClass(Context context) {
     return ((ActivityManager) context
         .getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
-  }
+    }
 
-  /**
-   * Check if OS version has a http URLConnection bug. See here for more
-   * information:
-   * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
-   * 
-   * @return
-   */
-  public static boolean hasHttpConnectionBug() {
+    /**
+    * Check if OS version has a http URLConnection bug. See here for more
+    * information:
+    * http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+    *
+    * @return
+    */
+    public static boolean hasHttpConnectionBug() {
     return Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO;
-  }
+    }
 
-  /**
-   * Check if OS version has built-in external cache dir method.
-   * 
-   * @return
-   */
-  public static boolean hasExternalCacheDir() {
+    /**
+    * Check if OS version has built-in external cache dir method.
+    *
+    * @return
+    */
+    public static boolean hasExternalCacheDir() {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO;
-  }
+    }
 
-  /**
-   * Check if ActionBar is available.
-   * 
-   * @return
-   */
-  public static boolean hasActionBar() {
+    /**
+    * Check if ActionBar is available.
+    *
+    * @return
+    */
+    public static boolean hasActionBar() {
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-  }
+    }
 
-  public static String getSDPath() {
+    public static String getSDPath() {
       File sdDir = null;
       boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
       if (sdCardExist == true) {
@@ -166,9 +164,9 @@ public class Utils {
           sdDir = Environment.getRootDirectory();
       }
       return sdDir.toString();
-  }
+    }
 
-  public static ArrayList<String> getAllPhotoPaths(String path) {
+    public static ArrayList<String> getAllPhotoPaths(String path) {
       File folder = new File(path);
       if (!folder.exists()) {
           folder.mkdir();
@@ -196,36 +194,10 @@ public class Utils {
           }
       }
       return null;
-  }
+    }
 
-  public static ArrayList<String> getAllPhotoPaths() {
-      String path = getSDPath() + "/" + PHOTO_PATH;
-      File folder = new File(path);
-      if (!folder.exists()) {
-          folder.mkdir();
-      }
-      if (folder.exists()) {
-          File[] files = folder.listFiles(new FilenameFilter(){
-
-              @Override
-              public boolean accept(File arg0, String arg1) {
-                  // TODO Auto-generated method stub
-                  if (arg1.endsWith(".jpg") || arg1.endsWith(".png") || arg1.endsWith(".bmp")) {
-                      return true;
-                  } else {
-                      return false;
-                  }
-              }});
-          if (files != null) {
-              ArrayList<String> pathList = new ArrayList<String>();
-              for(File f:files) {
-                  pathList.add(f.getPath());
-              }
-              return pathList;
-          } else {
-              return null;
-          }
-      }
-      return null;
-  }
+    public static String getDefaultPhotoPath() {
+        String path = getSDPath() + "/" + PHOTO_PATH;
+        return path;
+    }
 }

@@ -1,4 +1,3 @@
-
 /*
  *  * Copyright (C) 2015-2016 The Android Open Source Project
  *  *
@@ -52,7 +51,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class HorizontalGalleryActivity extends Activity implements OnPageChangeListener {
-
+    public static final String TAG = "zhaocheng";
     private static final int REQUEST_CODE_GET_DIRECTORY = 1;
     private CustomViewPager mHroizontalListView;
     private HorizontalAdapter mHorizontalAdapter;
@@ -87,13 +86,13 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         mHroizontalListView = (CustomViewPager)findViewById(R.id.hroizontal_list);
         /*mHorizontalAdapter = new HorizontalAdapter();*/
         mHroizontalListView.setOnPageChangeListener(this);
-        duoduo_photo_path = mPrefs.getString(DUODUO_PHOTO_PATH, null);
+        duoduo_photo_path = mPrefs.getString(DUODUO_PHOTO_PATH, Utils.getDefaultPhotoPath());
         if (duoduo_photo_path != null) {
-            Log.d("TEST", "duoduo_photo_path:"+duoduo_photo_path);
+            Log.d(TAG, "duoduo_photo_path:"+duoduo_photo_path);
             mPathList = Utils.getAllPhotoPaths(duoduo_photo_path);
             mImageCount = mPathList.size();
         } else {
-            Log.d("TEST", "duoduo_photo_path:null");
+            Log.d(TAG, "duoduo_photo_path:null");
         }
         getScreenSize();
         allocateImageCache(screen_width, screen_height-mActionBarHeight);
@@ -153,7 +152,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
 
     private void resetPhotoDirectory(String reset_dir) {
         // TODO Auto-generated method stub
-        Log.d("TEST", "reset_dir:"+reset_dir);
+        Log.d(TAG, "reset_dir:"+reset_dir);
         if (reset_dir.equalsIgnoreCase(duoduo_photo_path)) {
             return;
         }
@@ -193,7 +192,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         // TODO Auto-generated method stub
         mImageWidth = mHroizontalListView.getWidth();
         mImageHeight = mHroizontalListView.getHeight();
-        Log.d("TEST", "mImageWidth = "+mImageWidth+" mImageHeight"+mImageHeight);
+        Log.d(TAG, "mImageWidth = "+mImageWidth+" mImageHeight = "+mImageHeight);
         mImageWorker.setImageSize(mImageWidth, mImageHeight);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.empty_photo);
         Bitmap resizeB = Bitmap.createScaledBitmap(b, mImageWidth, mImageHeight, false);
@@ -221,8 +220,8 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
                 mActionBarHeight = 0;
             }
         }
-        Log.d("TEST", "screen_width = "+screen_width+" screen_height"+screen_height);
-        Log.d("TEST", "mActionBarHeight = "+mActionBarHeight);
+        Log.d(TAG, "screen_width = "+screen_width+" screen_height = "+screen_height);
+        Log.d(TAG, "mActionBarHeight = "+mActionBarHeight);
     }
 
     private class HorizontalAdapter extends PagerAdapter {
@@ -334,7 +333,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
-//        Log.d("TEST", "doImageMatrix_E:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
+//        Log.d(TAG, "doImageMatrix_E:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
         float mHeight = 0;
         if (mIsOutTheScreen == true) {
             mHeight = (mStepGapY/2) * (1 - Math.abs(movePos-mImageWidth/2) / (mImageWidth/2));
@@ -362,7 +361,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
-//        Log.d("TEST", "doImageMatrix_S:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
+//        Log.d(TAG, "doImageMatrix_S:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
         float mHeight = 0;
         if (mIsOutTheScreen == true) {
             mHeight = (mStepGapY/2) * (1 - Math.abs(movePos-mImageWidth/2) / (mImageWidth/2));
@@ -400,7 +399,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // TODO Auto-generated method stub
-//        Log.d("TEST", "position="+position+" positionOffset="+positionOffset+ "positionOffsetPixels="+positionOffsetPixels);
+//        Log.d(TAG, "position="+position+" positionOffset="+positionOffset+ "positionOffsetPixels="+positionOffsetPixels);
         if (mImageViewList.size() > 1) {
             if (positionOffsetPixels > 0 && positionOffsetPixels < mImageWidth) {
                 doImageMatrix_S(position, positionOffsetPixels);

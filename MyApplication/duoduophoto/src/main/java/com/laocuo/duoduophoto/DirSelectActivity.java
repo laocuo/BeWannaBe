@@ -1,4 +1,3 @@
-
 /*
  *  * Copyright (C) 2015-2016 The Android Open Source Project
  *  *
@@ -99,8 +98,6 @@ public class DirSelectActivity extends Activity implements OnItemClickListener{
             title.setText(filePath);
             File[] files=f.listFiles();
             if(!filePath.equals(rootPath)){
-/*                items.add("goroot");
-                paths.add(rootPath);*/
                 items.add("..");
                 paths.add(f.getParent());
             }
