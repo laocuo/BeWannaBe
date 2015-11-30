@@ -1,1 +1,1 @@
-include ':app', ':DoAnything', ':duoduophoto', ':tiaotiaojia'
+include ':DoAnything', ':duoduophoto', ':tiaotiaojia'
