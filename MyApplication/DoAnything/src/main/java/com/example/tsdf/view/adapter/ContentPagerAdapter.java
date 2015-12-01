@@ -13,10 +13,10 @@ public class ContentPagerAdapter extends FragmentPagerAdapter {
 
     private Context mContext;
 
-    public ContentPagerAdapter(FragmentManager fragmentManager) {
+/*    public ContentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         // TODO Auto-generated constructor stub
-    }
+    }*/
 
     public ContentPagerAdapter(Context mContext,
             FragmentManager fragmentManager) {

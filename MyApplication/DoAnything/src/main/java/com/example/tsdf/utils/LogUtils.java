@@ -8,6 +8,7 @@ import com.example.tsdf.view.fragment.GalleryShowFragment;
 import com.example.tsdf.view.fragment.PowerCalculatorFragment;
 import com.example.tsdf.view.fragment.ShowMatrixFragment;
 import com.example.tsdf.view.fragment.ShowMatrixGalleryFragment;
+import com.example.tsdf.view.fragment.SwipeRefreshList;
 
 import android.util.Log;
 
@@ -25,7 +26,9 @@ public class LogUtils {
             R.string.title_section1,
             R.string.title_section2,
             R.string.title_section3,
-            R.string.title_section4
+            R.string.title_section4,
+            R.string.title_section5,
+            R.string.title_section6
     };
 
     private static int[] mIconList = {
@@ -35,7 +38,7 @@ public class LogUtils {
     };
 
     private static Class<?>[] mClassList = {
-            ShowMatrixGalleryFragment.class,
+            SwipeRefreshList.class,
             GalleryShowFragment.class,
             PowerCalculatorFragment.class
     };
