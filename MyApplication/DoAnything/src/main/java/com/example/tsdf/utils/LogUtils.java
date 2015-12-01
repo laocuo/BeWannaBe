@@ -2,13 +2,14 @@
 package com.example.tsdf.utils;
 
 import com.example.tsdf.R;
+import com.example.tsdf.view.fragment.AudioControlFragment;
 import com.example.tsdf.view.fragment.ContentFragment;
 //import com.example.tsdf.view.fragment.ContentFragment;
 import com.example.tsdf.view.fragment.GalleryShowFragment;
 import com.example.tsdf.view.fragment.PowerCalculatorFragment;
 import com.example.tsdf.view.fragment.ShowMatrixFragment;
 import com.example.tsdf.view.fragment.ShowMatrixGalleryFragment;
-import com.example.tsdf.view.fragment.SwipeRefreshList;
+import com.example.tsdf.view.fragment.SwipeRefreshListFragment;
 
 import android.util.Log;
 
@@ -37,8 +38,10 @@ public class LogUtils {
             R.drawable.ic_menu_duration
     };
 
+    //            Class.forName("com.example.tsdf.view.fragment.SwipeRefreshList"),
     private static Class<?>[] mClassList = {
-            SwipeRefreshList.class,
+            SwipeRefreshListFragment.class,
+            AudioControlFragment.class,
             GalleryShowFragment.class,
             PowerCalculatorFragment.class
     };

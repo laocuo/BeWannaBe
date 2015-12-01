@@ -38,7 +38,7 @@ public class ContentPagerAdapter extends FragmentPagerAdapter {
         Class<?>[] classList = LogUtils.getClassList();
         Fragment mFragment = null;
         try {
-            mFragment = (Fragment) classList[position].getConstructor().newInstance();
+            mFragment = (Fragment) classList[position].newInstance();//getConstructor()
             Bundle args = new Bundle();
             args.putInt(LogUtils.ARG_SECTION_NUMBER, position + 1);
             mFragment.setArguments(args);

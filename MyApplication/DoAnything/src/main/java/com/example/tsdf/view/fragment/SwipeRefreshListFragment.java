@@ -23,7 +23,7 @@ import java.util.Arrays;
 /**
  * Created by administrator on 12/1/15.
  */
-public class SwipeRefreshList extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class SwipeRefreshListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private final int REFRESH_COMPLETE = 1;
     private LayoutInflater mLayoutInflater;
     private SwipeRefreshLayout mSwipeRefreshLayout;
