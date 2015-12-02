@@ -11,7 +11,7 @@
     <string name="title_section7">标题7</string>
     <string name="title_section8">标题8</string>
     <string name="title_section9">标题9</string>
-    
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Done</string>
@@ -24,4 +24,7 @@
     <string name="sub_title_section2">子标题2</string>
     <string name="sub_title_section3">子标题3</string>
     <string name="sub_title_section4">子标题4</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
