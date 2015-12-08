@@ -12,6 +12,7 @@ import com.example.tsdf.view.fragment.ShowMatrixFragment;
 import com.example.tsdf.view.fragment.ShowMatrixGalleryFragment;
 import com.example.tsdf.view.fragment.SwipeRefreshListFragment;
 import com.example.tsdf.view.fragment.ViewDragFragment;
+import com.example.tsdf.view.fragment.ZoomViewFragment;
 
 import android.util.Log;
 
@@ -44,10 +45,8 @@ public class LogUtils {
     private static Class<?>[] mClassList = {
             SwipeRefreshListFragment.class,
             AudioControlFragment.class,
-            GalleryShowFragment.class,
-            PowerCalculatorFragment.class,
             ViewDragFragment.class,
-            MyViewGroupFragment.class
+            ZoomViewFragment.class
     };
 
     public static int[] getStringList() {

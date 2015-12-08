@@ -21,11 +21,7 @@ public class SubActivity extends FragmentActivity implements ICustomBottomBar {
     private CustomBottomBar mCustomBottomBar;
     private LayoutInflater mLayoutInflater;
     private FragmentManager mFragmentManager;
-    private int[] mTitles = {
-            R.string.sub_title_section1,
-            R.string.sub_title_section2,
-            R.string.sub_title_section3
-    };
+    private int[] mTitles = LogUtils.getStringList();
 
     @Override
     protected void onCreate(Bundle arg0) {
