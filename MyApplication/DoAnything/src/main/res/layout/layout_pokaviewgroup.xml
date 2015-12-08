@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customize="http://schemas.android.com/apk/res/com.example.tsdf"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.tsdf.view.CustomizedView.PokaViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        customize:leftSize="30"
+        customize:topSize="60">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="#E5ED05"
+            android:text="TEST1"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="#CE4705"
+            android:text="TEST2"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="#E46D05"
+            android:text="TEST3"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:background="#123D05"
+            android:text="TEST4"/>
+    </com.example.tsdf.view.CustomizedView.PokaViewGroup>
+</LinearLayout>

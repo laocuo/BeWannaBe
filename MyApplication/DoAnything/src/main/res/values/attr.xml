@@ -15,4 +15,8 @@
         <attr name="splitSize" />
         <attr name="bg" />
     </declare-styleable>
+    <declare-styleable name="namePokaViewGroup">
+        <attr name="leftSize" format="integer"/>
+        <attr name="topSize" format="integer"/>
+    </declare-styleable>
 </resources>

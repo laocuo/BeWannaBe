@@ -6,6 +6,7 @@ import com.example.tsdf.view.fragment.AudioControlFragment;
 import com.example.tsdf.view.fragment.ContentFragment;
 //import com.example.tsdf.view.fragment.ContentFragment;
 import com.example.tsdf.view.fragment.GalleryShowFragment;
+import com.example.tsdf.view.fragment.MyViewGroupFragment;
 import com.example.tsdf.view.fragment.PowerCalculatorFragment;
 import com.example.tsdf.view.fragment.ShowMatrixFragment;
 import com.example.tsdf.view.fragment.ShowMatrixGalleryFragment;
@@ -45,7 +46,8 @@ public class LogUtils {
             AudioControlFragment.class,
             GalleryShowFragment.class,
             PowerCalculatorFragment.class,
-            ViewDragFragment.class
+            ViewDragFragment.class,
+            MyViewGroupFragment.class
     };
 
     public static int[] getStringList() {
