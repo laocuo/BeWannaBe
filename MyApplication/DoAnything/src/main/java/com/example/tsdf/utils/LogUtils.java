@@ -3,6 +3,7 @@ package com.example.tsdf.utils;
 
 import com.example.tsdf.R;
 import com.example.tsdf.view.fragment.AudioControlFragment;
+import com.example.tsdf.view.fragment.BinarySlidingFragment;
 import com.example.tsdf.view.fragment.ContentFragment;
 //import com.example.tsdf.view.fragment.ContentFragment;
 import com.example.tsdf.view.fragment.GalleryShowFragment;
@@ -46,7 +47,8 @@ public class LogUtils {
             SwipeRefreshListFragment.class,
             AudioControlFragment.class,
             ViewDragFragment.class,
-            ZoomViewFragment.class
+            ZoomViewFragment.class,
+            BinarySlidingFragment.class
     };
 
     public static int[] getStringList() {
