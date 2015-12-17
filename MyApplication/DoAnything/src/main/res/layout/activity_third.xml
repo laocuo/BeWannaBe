@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:customize="http://schemas.android.com/apk/res/com.example.tsdf"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.tsdf.view.impl.ThirdActivity">
+
+    <com.example.tsdf.view.CustomizedView.ViewPagerIndicator
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/pagerindicator_third"
+        android:background="@android:color/holo_blue_dark"
+        customize:item_visiable="3"/>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/viewpager_third">
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

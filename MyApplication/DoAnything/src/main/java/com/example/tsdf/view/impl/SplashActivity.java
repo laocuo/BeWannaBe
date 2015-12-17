@@ -84,7 +84,7 @@ public class SplashActivity extends Activity implements ISplashView {
         if (mAD == null) {
             AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
             String[] mItemName = {
-                    "MainActivity", "SubActivity"
+                    "MainActivity", "SubActivity", "ThirdActivity"
             };
             mAlertDialog.setItems(mItemName, new OnClickListener() {
 
@@ -93,8 +93,10 @@ public class SplashActivity extends Activity implements ISplashView {
                     // TODO Auto-generated method stub
                     if (arg1 == 0) {
                         startActivity(new Intent(mContext, MainActivity.class));
-                    } else {
+                    } else if (arg1 == 1){
                         startActivity(new Intent(mContext, SubActivity.class));
+                    } else {
+                        startActivity(new Intent(mContext, ThirdActivity.class));
                     }
                     finish();
                 }

@@ -32,8 +32,7 @@ public class LogUtils {
             R.string.title_section2,
             R.string.title_section3,
             R.string.title_section4,
-            R.string.title_section5,
-            R.string.title_section6
+            R.string.title_section5
     };
 
     private static int[] mIconList = {
