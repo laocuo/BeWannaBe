@@ -3,19 +3,27 @@ package com.example.tsdf.view.CustomizedView;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.os.Looper;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
 import com.example.tsdf.R;
 
-public class ChangeColorIconWithTextView extends View {
+public class ChangeColorIconWithTextView extends View
+{
+
     private Bitmap mBitmap;
     private Canvas mCanvas;
     private Paint mPaint;
@@ -43,9 +51,17 @@ public class ChangeColorIconWithTextView extends View {
             TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
     private Paint mTextPaint;
     private Rect mTextBound = new Rect();
-
-    public ChangeColorIconWithTextView(Context context) {
+    private Context mContext;
+    public ChangeColorIconWithTextView(Context context)
+    {
         super(context);
+        mContext = context;
+        mTextPaint = new Paint();
+        mTextPaint.setTextSize(mTextSize);
+        mTextPaint.setColor(0xff555555);
+        // 得到text绘制范围
+        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
+        setPadding(10, 10, 10, 10);
     }
 
     /**
@@ -54,18 +70,21 @@ public class ChangeColorIconWithTextView extends View {
      * @param context
      * @param attrs
      */
-    public ChangeColorIconWithTextView(Context context, AttributeSet attrs) {
+    public ChangeColorIconWithTextView(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
-
+        mContext = context;
         // 获取设置的图标
         TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.ChangeColorIconView);
 
         int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
 
             int attr = a.getIndex(i);
-            switch (attr) {
+            switch (attr)
+            {
                 case R.styleable.ChangeColorIconView_icon:
                     BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);
                     mIconBitmap = drawable.getBitmap();
@@ -116,18 +135,20 @@ public class ChangeColorIconWithTextView extends View {
     @Override
     protected void onDraw(Canvas canvas)
     {
+
         int alpha = (int) Math.ceil((255 * mAlpha));
         canvas.drawBitmap(mIconBitmap, null, mIconRect, null);
         setupTargetBitmap(alpha);
         drawSourceText(canvas, alpha);
         drawTargetText(canvas, alpha);
         canvas.drawBitmap(mBitmap, 0, 0, null);
+
     }
 
     private void setupTargetBitmap(int alpha)
     {
         mBitmap = Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
+                Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
         mPaint = new Paint();
         mPaint.setColor(mColor);
@@ -158,5 +179,79 @@ public class ChangeColorIconWithTextView extends View {
                         - mTextBound.width() / 2,
                 mIconRect.bottom + mTextBound.height(), mTextPaint);
 
+    }
+
+
+
+
+
+    public void setIconAlpha(float alpha)
+    {
+        this.mAlpha = alpha;
+        invalidateView();
+    }
+
+    private void invalidateView()
+    {
+        if (Looper.getMainLooper() == Looper.myLooper())
+        {
+            invalidate();
+        } else
+        {
+            postInvalidate();
+        }
+    }
+
+    public void setIconColor(int color)
+    {
+        mColor = color;
+    }
+
+    public void setIcon(int resId)
+    {
+        this.mIconBitmap = BitmapFactory.decodeResource(getResources(), resId);
+        if (mIconRect != null)
+            invalidateView();
+    }
+
+    public void setIcon(Bitmap iconBitmap)
+    {
+        this.mIconBitmap = iconBitmap;
+        if (mIconRect != null)
+            invalidateView();
+    }
+
+    private static final String INSTANCE_STATE = "instance_state";
+    private static final String STATE_ALPHA = "state_alpha";
+
+    @Override
+    protected Parcelable onSaveInstanceState()
+    {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(INSTANCE_STATE, super.onSaveInstanceState());
+        bundle.putFloat(STATE_ALPHA, mAlpha);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state)
+    {
+        if (state instanceof Bundle)
+        {
+            Bundle bundle = (Bundle) state;
+            mAlpha = bundle.getFloat(STATE_ALPHA);
+            super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATE));
+        } else
+        {
+            super.onRestoreInstanceState(state);
+        }
+
+    }
+
+    public void setBitmapAndText(int icon, String s) {
+        mIconBitmap = BitmapFactory.decodeResource(getResources(), icon);
+        mText = s;
+        mColor = Color.RED;
+        mTextSize = 10;
     }
 }

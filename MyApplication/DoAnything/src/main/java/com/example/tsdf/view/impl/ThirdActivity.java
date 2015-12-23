@@ -1,6 +1,5 @@
 package com.example.tsdf.view.impl;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,24 +8,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import com.example.tsdf.R;
 import com.example.tsdf.utils.LogUtils;
-import com.example.tsdf.view.CustomizedView.ViewPagerIndicator;
+import com.example.tsdf.view.CustomizedView.ColorfulPagerIndicator;
 import java.util.Arrays;
 import java.util.List;
 
-public class ThirdActivity extends FragmentActivity implements ViewPagerIndicator.PageChangeListener {
-    private Context mContext;
+public class ThirdActivity extends FragmentActivity{
     private FragmentManager mFragmentManager;
-    private int[] mTitles = LogUtils.getStringList();
-    private ViewPagerIndicator mPagerIndicator;
+    private ColorfulPagerIndicator mPagerIndicator;
     private ViewPager mViewPager;
+    private List<String> list = Arrays.asList("Title1", "Title2", "Title3", "Title4", "Title5");
+    private List<Integer> iconList = Arrays.asList(R.drawable.ic_menu_allfriends,
+            R.drawable.ic_menu_cc,
+            R.drawable.ic_menu_emoticons,
+            R.drawable.ic_menu_friendslist,
+            R.drawable.ic_menu_myplaces);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
         mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_third);
         mViewPager = (ViewPager) findViewById(R.id.viewpager_third);
-        mPagerIndicator = (ViewPagerIndicator) findViewById(R.id.pagerindicator_third);
+        mPagerIndicator = (ColorfulPagerIndicator) findViewById(R.id.pagerindicator_third);
         mViewPager.setAdapter(new FragmentPagerAdapter(mFragmentManager) {
             @Override
             public Fragment getItem(int position) {
@@ -49,27 +51,7 @@ public class ThirdActivity extends FragmentActivity implements ViewPagerIndicato
                 return LogUtils.getClassList().length;
             }
         });
-        List<String> list = Arrays.asList("Title1", "Title2", "Title3", "Title4", "Title5");
-//        for (int i=0;i<mTitles.length;i++) {
-//            list.add(mContext.getResources().getString(mTitles[i]));
-//        }
-        mPagerIndicator.setOnPageChangeListener(this);
-        mPagerIndicator.setTabItemTitles(list);
+        mPagerIndicator.setTabItemTitles(list, iconList);
         mPagerIndicator.setViewPager(mViewPager, 0);
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 }

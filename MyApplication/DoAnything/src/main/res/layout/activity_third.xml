@@ -7,12 +7,11 @@
     android:orientation="vertical"
     tools:context="com.example.tsdf.view.impl.ThirdActivity">
 
-    <com.example.tsdf.view.CustomizedView.ViewPagerIndicator
+    <com.example.tsdf.view.CustomizedView.ColorfulPagerIndicator
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:id="@+id/pagerindicator_third"
-        android:background="@android:color/holo_blue_dark"
-        customize:item_visiable="3"/>
+        customize:item_visiable="4"/>
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
