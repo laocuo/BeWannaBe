@@ -158,7 +158,8 @@ public class MainView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         // TODO Auto-generated method stub
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        setMeasuredDimension(width, width);
     }
 
     private void initView() {
@@ -259,6 +260,7 @@ public class MainView extends View {
                             public void onAnimationEnd(Animator animation) {
                                 // TODO Auto-generated method stub
                                 selectedChess.setVisibility(View.GONE);
+                                servicehandler.sendEmptyMessage(INVALIDATE);
                                 moveSon(point_list.get(selectedId), point_list.get(end));
                                 String rec = saveChessRecordList(point_list.get(end).dir, selectedId,end);
                                 if (rec != null) {

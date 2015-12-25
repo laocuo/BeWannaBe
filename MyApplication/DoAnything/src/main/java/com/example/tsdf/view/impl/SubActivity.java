@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 public class SubActivity extends FragmentActivity implements ICustomBottomBar {
@@ -28,6 +29,7 @@ public class SubActivity extends FragmentActivity implements ICustomBottomBar {
         // TODO Auto-generated method stub
         super.onCreate(arg0);
         mContext = this;
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         mLayoutInflater = LayoutInflater.from(mContext);
         mFragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_sub);

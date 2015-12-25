@@ -7,8 +7,9 @@ import com.example.tsdf.view.fragment.BinarySlidingFragment;
 import com.example.tsdf.view.fragment.ContentFragment;
 //import com.example.tsdf.view.fragment.ContentFragment;
 import com.example.tsdf.view.fragment.GalleryShowFragment;
+import com.example.tsdf.view.fragment.JingdongFragment;
 import com.example.tsdf.view.fragment.MyViewGroupFragment;
-import com.example.tsdf.view.fragment.PowerCalculatorFragment;
+import com.example.tsdf.view.fragment.NetEasyFragment;
 import com.example.tsdf.view.fragment.ShowMatrixFragment;
 import com.example.tsdf.view.fragment.ShowMatrixGalleryFragment;
 import com.example.tsdf.view.fragment.SwipeRefreshListFragment;
@@ -43,11 +44,11 @@ public class LogUtils {
 
     //            Class.forName("com.example.tsdf.view.fragment.SwipeRefreshList"),
     private static Class<?>[] mClassList = {
-            SwipeRefreshListFragment.class,
+            JingdongFragment.class,
+            NetEasyFragment.class,
             AudioControlFragment.class,
             ViewDragFragment.class,
-            ZoomViewFragment.class,
-            BinarySlidingFragment.class
+            ZoomViewFragment.class
     };
 
     public static int[] getStringList() {

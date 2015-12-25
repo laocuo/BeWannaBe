@@ -1,0 +1,91 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tsdf.view.fragment.JingdongFragment">
+
+    <ScrollView
+        android:id="@+id/jd_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/jd_top_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v4.view.ViewPager>
+                <LinearLayout
+                    android:id="@+id/jd_top_gallery_tips_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="170dp" />
+            </FrameLayout>
+            <include layout="@layout/jd_grid_item"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:src="@android:color/darker_gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text=":Man 300 jian 50!!"
+                android:paddingStart="100dp"
+                android:drawableStart="@android:drawable/sym_call_incoming"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:src="@android:color/darker_gray"/>
+            <include layout="@layout/jd_miaosha"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/jd_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+        <Button
+            android:id="@+id/jd_top_bar_saoyisao"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Scan"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@android:drawable/ic_menu_recent_history"
+            android:layout_height="match_parent" />
+        <ImageButton
+            android:id="@+id/jd_top_bar_search"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:padding="5dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/jd_top_bar_message"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Message"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@android:drawable/ic_menu_save"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</FrameLayout>

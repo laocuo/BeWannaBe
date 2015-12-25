@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import com.example.tsdf.R;
 import com.example.tsdf.utils.LogUtils;
 import com.example.tsdf.view.CustomizedView.ColorfulPagerIndicator;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,12 +18,15 @@ public class ThirdActivity extends FragmentActivity{
     private FragmentManager mFragmentManager;
     private ColorfulPagerIndicator mPagerIndicator;
     private ViewPager mViewPager;
-    private List<String> list = Arrays.asList("Title1", "Title2", "Title3", "Title4", "Title5");
+    private List<String> list = new ArrayList<>();
     private List<Integer> iconList = Arrays.asList(R.drawable.ic_menu_allfriends,
             R.drawable.ic_menu_cc,
             R.drawable.ic_menu_emoticons,
             R.drawable.ic_menu_friendslist,
-            R.drawable.ic_menu_myplaces);
+            R.drawable.ic_menu_myplaces,
+            R.drawable.ic_menu_duration,
+            R.drawable.ic_menu_contact,
+            R.drawable.ic_menu_start_conversation);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,11 @@ public class ThirdActivity extends FragmentActivity{
                 return LogUtils.getClassList().length;
             }
         });
+        int[] stringids = LogUtils.getStringList();
+        list.clear();
+        for(int i=0;i<stringids.length;i++) {
+            list.add(getString(stringids[i]));
+        }
         mPagerIndicator.setTabItemTitles(list, iconList);
         mPagerIndicator.setViewPager(mViewPager, 0);
     }

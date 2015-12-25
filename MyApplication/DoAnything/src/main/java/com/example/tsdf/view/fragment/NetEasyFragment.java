@@ -25,7 +25,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
-public class PowerCalculatorFragment extends Fragment
+public class NetEasyFragment extends Fragment
         implements DragRefreshListView.OnRefreshListener {
 
     @SuppressWarnings("unused")
