@@ -300,9 +300,10 @@ public class ColorfulPagerIndicator extends LinearLayout
     protected void highLightTextView(int position)
     {
         View view = getChildAt(position);
-        if (view instanceof TextView)
-        {
+        if (view instanceof TextView) {
             ((TextView) view).setTextColor(COLOR_TEXT_HIGHLIGHTCOLOR);
+        } else if (view instanceof ChangeColorIconWithTextView) {
+            ((ChangeColorIconWithTextView) view).setIconAlpha(1.0f);
         }
 
     }
@@ -315,9 +316,10 @@ public class ColorfulPagerIndicator extends LinearLayout
         for (int i = 0; i < getChildCount(); i++)
         {
             View view = getChildAt(i);
-            if (view instanceof TextView)
-            {
+            if (view instanceof TextView) {
                 ((TextView) view).setTextColor(COLOR_TEXT_NORMAL);
+            } else if (view instanceof ChangeColorIconWithTextView) {
+                ((ChangeColorIconWithTextView) view).setIconAlpha(0);
             }
         }
     }

@@ -121,4 +121,25 @@ public class DragRefreshScrollView extends ScrollView {
         // TODO Auto-generated method stub
         smoothScrollTo(0, mHeadContentHeight);
     }
+
+    public int getHeadHeight() {
+        return mHeadContentHeight;
+    }
+
+    private OverScorlledListener mOverScorlledListener;
+    public interface OverScorlledListener{
+        void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY);
+    }
+
+    public void setOverScorlledListener(OverScorlledListener l) {
+        mOverScorlledListener = l;
+    }
+
+    @Override
+    protected void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
+        if (mOverScorlledListener != null) {
+            mOverScorlledListener.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+        }
+        super.onOverScrolled(scrollX, scrollY, clampedX, clampedY);
+    }
 }

@@ -235,7 +235,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             // TODO Auto-generated method stub
-//            super.destroyItem(container, position, object);
             ImageView v = mImageViewList.get(position);
             v.setImageBitmap(null);
             container.removeView(v);
@@ -244,7 +243,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // TODO Auto-generated method stub
-//            return super.instantiateItem(container, position);
             ImageView v = mImageViewList.get(position);
             mImageWorker.loadImage(position, v);
             container.addView(v);
@@ -275,7 +273,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         child.measure(childWidthSpec, childHeightSpec);
     }
 
-    public void allocateImageCache(int image_width, int image_height) {
+    private void allocateImageCache(int image_width, int image_height) {
         // TODO Auto-generated method stub
         ImageCacheParams cacheParams = new ImageCacheParams(IMAGE_CACHE_DIR);
 
@@ -290,8 +288,9 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         // ImageDetailActivity so a third lets us keep all our sample image
         // thumbnails in memory
         // at once.
+        Log.d(TAG, "Utils.getMemoryClass(this)="+Utils.getMemoryClass(this));
         cacheParams.memCacheSize = 1024 * 1024 * Utils
-            .getMemoryClass(this) / 3;
+            .getMemoryClass(this) / 2;
 
         // The ImageWorker takes care of loading images into our ImageView children
         // asynchronously

@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import com.example.tsdf.R;
 import com.example.tsdf.utils.DensityUtils;
 import com.example.tsdf.utils.L;
+import com.example.tsdf.view.CustomizedView.DragRefreshScrollView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +40,8 @@ public class JingdongFragment extends Fragment {
 
     private LinearLayout jd_top_bar;
     private Drawable jd_top_bar_bg_drawable;
-    private ScrollView jd_content_container;
+    private DragRefreshScrollView jd_content_container;
+    private LinearLayout jd_content;
     private ViewPager jd_top_gallery;
     private TopGalleryAdapter jd_top_gallery_adapter;
     private LinearLayout jd_top_gallery_tips_group;
@@ -111,7 +113,8 @@ public class JingdongFragment extends Fragment {
         jd_top_bar_bg_drawable = new ColorDrawable(Color.RED);
         jd_top_bar.setBackground(jd_top_bar_bg_drawable);
         jd_top_bar_bg_drawable.setAlpha(0);
-        jd_content_container = (ScrollView) v.findViewById(R.id.jd_content_container);
+        jd_content_container = (DragRefreshScrollView) v.findViewById(R.id.jd_content_container);
+        jd_content = (LinearLayout) v.findViewById(R.id.jd_content);
         jd_top_gallery = (ViewPager) v.findViewById(R.id.jd_top_gallery);
         jd_top_gallery_tips_group = (LinearLayout) v.findViewById(R.id.jd_top_gallery_tips_group);
         jd_miaosha = (HorizontalScrollView) v.findViewById(R.id.jd_miaoshao_scrollview);
@@ -119,6 +122,23 @@ public class JingdongFragment extends Fragment {
     }
 
     private void initData() {
+        jd_content_container.setOverScorlledListener(new DragRefreshScrollView.OverScorlledListener() {
+            @Override
+            public void onOverScrolled(int scrollX, int scrollY, boolean clampedX, boolean clampedY) {
+                int alpha = 150;
+                int headHeight = jd_content_container.getHeadHeight();
+                if (scrollY < headHeight) {
+                    jd_top_bar.setVisibility(View.INVISIBLE);
+                } else {
+                    jd_top_bar.setVisibility(View.VISIBLE);
+                    if (scrollY - headHeight <= 150) {
+                        alpha = scrollY - headHeight;
+                    }
+                    jd_top_bar_bg_drawable.setAlpha(alpha);
+                }
+            }
+        });
+        jd_content_container.setContainer(jd_content);
         jd_content_container.setVerticalScrollBarEnabled(false);
         jd_top_gallery_adapter = new TopGalleryAdapter();
         jd_top_gallery.setAdapter(jd_top_gallery_adapter);
@@ -167,19 +187,19 @@ public class JingdongFragment extends Fragment {
                 params = new ViewGroup.LayoutParams(DensityUtils.dp2px(mContext, 160.0f),
                         ViewGroup.LayoutParams.MATCH_PARENT);
             }
-            int lpWidth = params.width;
-            int childWidthSpec = 0;
-            if (lpWidth > 0) {
-                childWidthSpec = View.MeasureSpec.makeMeasureSpec(lpWidth, View.MeasureSpec.EXACTLY);
-            }
+//            int lpWidth = params.width;
+//            int childWidthSpec = 0;
+//            if (lpWidth > 0) {
+//                childWidthSpec = View.MeasureSpec.makeMeasureSpec(lpWidth, View.MeasureSpec.EXACTLY);
+//            }
 //            L.d("lpWidth:"+lpWidth+"\nchildWidthSpec:"+childWidthSpec);
-            int lpHeight = params.height;
-            int childHeightSpec = 0;
-            if (lpHeight > 0) {
-                childHeightSpec = View.MeasureSpec.makeMeasureSpec(lpHeight, View.MeasureSpec.EXACTLY);
-            }
+//            int lpHeight = params.height;
+//            int childHeightSpec = 0;
+//            if (lpHeight > 0) {
+//                childHeightSpec = View.MeasureSpec.makeMeasureSpec(lpHeight, View.MeasureSpec.EXACTLY);
+//            }
 //            L.d("lpHeight:"+lpHeight+"\nchildHeightSpec:"+childHeightSpec);
-            v.measure(childWidthSpec, childHeightSpec);
+//            v.measure(childWidthSpec, childHeightSpec);
             ImageView iv = (ImageView)v.findViewById(R.id.jd_miaosha_item_image);
             iv.setImageResource(jd_miaosha_iconList.get(i));
             jd_miaosha_container.addView(v, params);

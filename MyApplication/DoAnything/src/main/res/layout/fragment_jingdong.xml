@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.tsdf.view.fragment.JingdongFragment">
 
-    <ScrollView
+    <com.example.tsdf.view.CustomizedView.DragRefreshScrollView
         android:id="@+id/jd_content_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <LinearLayout
+            android:id="@+id/jd_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -47,7 +48,7 @@
                 android:src="@android:color/darker_gray"/>
             <include layout="@layout/jd_miaosha"/>
         </LinearLayout>
-    </ScrollView>
+    </com.example.tsdf.view.CustomizedView.DragRefreshScrollView>
 
     <LinearLayout
         android:id="@+id/jd_top_bar"
@@ -87,5 +88,4 @@
             android:drawableTop="@android:drawable/ic_menu_save"
             android:layout_height="match_parent" />
     </LinearLayout>
-
 </FrameLayout>
