@@ -91,7 +91,7 @@ public class ImageResizer extends ImageWorker {
       Log.d(TAG, "processBitmap - " + resId);
     }
     return decodeSampledBitmapFromResource(mActivity.getResources(),
-        resId, mImageWidth, mImageHeight);
+            resId, mImageWidth, mImageHeight);
   }
 
   @Override
@@ -174,11 +174,16 @@ public class ImageResizer extends ImageWorker {
   //add by laocuo@163.com
   public static synchronized Bitmap decodeScaledBitmapFromFile(
           String filename, int reqWidth, int reqHeight) {
-
-      Bitmap b = decodeSampledBitmapFromFile(filename, reqWidth, reqHeight);
-      Bitmap resizedb = Bitmap.createScaledBitmap(b, reqWidth, reqHeight, false);
+      Bitmap b = null, rb;
+      try {
+          b = decodeSampledBitmapFromFile(filename, reqWidth, reqHeight);
+          rb = Bitmap.createScaledBitmap(b, reqWidth, reqHeight, false);
+      } catch (OutOfMemoryError e) {
+          Log.d("zhaocheng", "OutOfMemoryError");
+          return null;
+      }
       b.recycle();
-      return resizedb;
+      return rb;
     }
 
   /**

@@ -188,16 +188,20 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         super.onDestroy();
     }
 
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        return super.onMenuOpened(featureId, menu);
+    }
+
     private void setImageCacheSize() {
         // TODO Auto-generated method stub
         mImageWidth = mHroizontalListView.getWidth();
         mImageHeight = mHroizontalListView.getHeight();
-        Log.d(TAG, "mImageWidth = "+mImageWidth+" mImageHeight = "+mImageHeight);
+        Log.d("zhaocheng", "mImageWidth="+mImageWidth+" mImageHeight="+mImageHeight);
         mImageWorker.setImageSize(mImageWidth, mImageHeight);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.empty_photo);
         Bitmap resizeB = Bitmap.createScaledBitmap(b, mImageWidth, mImageHeight, false);
         b.recycle();
-        b = null;
         mImageWorker.setLoadingImage(resizeB);
     }
 
@@ -220,8 +224,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
                 mActionBarHeight = 0;
             }
         }
-        Log.d(TAG, "screen_width = "+screen_width+" screen_height = "+screen_height);
-        Log.d(TAG, "mActionBarHeight = "+mActionBarHeight);
     }
 
     private class HorizontalAdapter extends PagerAdapter {
@@ -236,7 +238,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         public void destroyItem(ViewGroup container, int position, Object object) {
             // TODO Auto-generated method stub
             ImageView v = mImageViewList.get(position);
-            v.setImageBitmap(null);
+            mImageWorker.releaseImage(position, v);
             container.removeView(v);
         }
 
@@ -290,8 +292,8 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         // at once.
         Log.d(TAG, "Utils.getMemoryClass(this)="+Utils.getMemoryClass(this));
         cacheParams.memCacheSize = 1024 * 1024 * Utils
-            .getMemoryClass(this) / 2;
-
+            .getMemoryClass(this) / 3;
+        cacheParams.diskCacheSize = cacheParams.memCacheSize;
         // The ImageWorker takes care of loading images into our ImageView children
         // asynchronously
         mImageWorker = new ImageResizer(this, image_width, image_height);

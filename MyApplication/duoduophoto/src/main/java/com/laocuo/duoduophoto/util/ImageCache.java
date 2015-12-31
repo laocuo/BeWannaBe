@@ -134,16 +134,18 @@ public class ImageCache {
    */
   private void init(Context context, ImageCacheParams cacheParams) {
     final File diskCacheDir = DiskLruCache.getDiskCacheDir(context,
-        cacheParams.uniqueName);
+            cacheParams.uniqueName);
 
     // Set up disk cache
     if (cacheParams.diskCacheEnabled) {
       mDiskCache = DiskLruCache.openCache(context, diskCacheDir,
           cacheParams.diskCacheSize);
       mDiskCache.setCompressParams(cacheParams.compressFormat,
-          cacheParams.compressQuality);
+              cacheParams.compressQuality);
       if (cacheParams.clearDiskCacheOnStart) {
-        mDiskCache.clearCache();
+        if (mDiskCache != null) {
+          mDiskCache.clearCache();
+        }
       }
     }
 
@@ -170,12 +172,12 @@ public class ImageCache {
 
     // Add to memory cache
     if (mMemoryCache != null && mMemoryCache.get(data) == null) {
+      Log.d(TAG,"add:"+data);
       mMemoryCache.put(data, bitmap);
     }
 
     // Add to disk cache
     if (mDiskCache != null && !mDiskCache.containsKey(data)) {
-      Log.d("mDiskCache-put", "Should not be called");
       mDiskCache.put(data, bitmap);
     }
   }
@@ -200,6 +202,19 @@ public class ImageCache {
     return null;
   }
 
+  public void releaseBitmapFromMemCache(String data) {
+    if (mMemoryCache != null) {
+      Bitmap b = mMemoryCache.remove(data);
+      if (b != null) {
+          Log.d(TAG, "rel:" + data);
+          if (!b.isRecycled()) {
+              Log.d(TAG, "b.recycle();");
+              b.recycle();
+          }
+      }
+    }
+  }
+
   /**
    * Get from disk cache.
    * 
@@ -209,7 +224,13 @@ public class ImageCache {
    */
   public Bitmap getBitmapFromDiskCache(String data) {
     if (mDiskCache != null) {
-      return mDiskCache.get(data);
+      final Bitmap memBitmap = mDiskCache.get(data);
+        if (memBitmap != null) {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Disk Cache hit");
+            }
+            return memBitmap;
+        }
     }
     return null;
   }
@@ -219,7 +240,9 @@ public class ImageCache {
   }
 
   public void clearCaches() {
-    mDiskCache.clearCache();
+    if (mDiskCache != null) {
+      mDiskCache.clearCache();
+    }
     mMemoryCache.evictAll();
   }
 

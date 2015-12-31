@@ -19,6 +19,7 @@ package com.laocuo.duoduophoto.util;
 import java.lang.ref.WeakReference;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -85,6 +86,13 @@ public abstract class ImageWorker {
     }
   }
 
+    public void releaseImage(Object data, ImageView imageView) {
+        imageView.setImageBitmap(null);
+        if (mImageCache != null) {
+            mImageCache.releaseBitmapFromMemCache(String.valueOf(data));
+        }
+    }
+
   /**
    * Load an image specified from a set adapter into an ImageView (override
    * {@link ImageWorker#processBitmap(Object)} to define the processing logic).
@@ -106,6 +114,15 @@ public abstract class ImageWorker {
     } else {
       throw new NullPointerException(
           "Data not set, must call setAdapter() first.");
+    }
+  }
+
+  public void releaseImage(int num, ImageView imageView) {
+    if (mImageWorkerAdapter != null) {
+      releaseImage(mImageWorkerAdapter.getItem(num), imageView);
+    } else {
+      throw new NullPointerException(
+              "Data not set, must call setAdapter() first.");
     }
   }
 
@@ -434,6 +451,7 @@ public abstract class ImageWorker {
 
     protected void setImageBitmap() {
       imageView.setImageBitmap(bitmap);
+//        imageView.setImageDrawable(new BitmapDrawable(imageView.getContext().getResources(),bitmap));
     }
   }
 
