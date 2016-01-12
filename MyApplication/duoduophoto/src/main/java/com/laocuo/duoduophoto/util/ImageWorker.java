@@ -32,6 +32,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.laocuo.duoduophoto.BuildConfig;
+import com.laocuo.duoduophoto.R;
 
 /**
  * This class wraps up completing some arbitrary long running work when loading
@@ -44,7 +45,7 @@ public abstract class ImageWorker {
 
   protected ImageCache mImageCache;
   private Bitmap mLoadingBitmap;
-  private boolean mFadeInBitmap = true;
+  private boolean mFadeInBitmap = false;
   private volatile boolean mExitTasksEarly = false;
 
   protected Activity mActivity;
@@ -450,8 +451,7 @@ public abstract class ImageWorker {
     }
 
     protected void setImageBitmap() {
-      imageView.setImageBitmap(bitmap);
-//        imageView.setImageDrawable(new BitmapDrawable(imageView.getContext().getResources(),bitmap));
+        imageView.setImageBitmap(bitmap);
     }
   }
 

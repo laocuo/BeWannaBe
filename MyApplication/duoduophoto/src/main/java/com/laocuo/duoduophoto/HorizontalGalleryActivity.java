@@ -63,6 +63,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
     private ImageResizer mImageWorker;
     private static final String IMAGE_CACHE_DIR = "thumbs";
     private int mImageCount;
+    private final int IMAGE_PAGE_COUNT = 4;
     private Matrix mMatrix_s, mMatrix_e;
     private float SCALE_Y = 4f;
     private float SCALE_X = 16f;
@@ -82,6 +83,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mMatrix_s = new Matrix();
         mMatrix_e = new Matrix();
+        allocateImageView();
         mProgressBar = (ProgressBar)findViewById(R.id.hroizontal_list_progressbar);
         mHroizontalListView = (CustomViewPager)findViewById(R.id.hroizontal_list);
         /*mHorizontalAdapter = new HorizontalAdapter();*/
@@ -101,7 +103,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
             public void run() {
                 // TODO Auto-generated method stub
                 setImageCacheSize();
-                allocateImageView();
                 mProgressBar.setVisibility(View.GONE);
                 if (mImageCount > 0) {
                     mHorizontalAdapter = new HorizontalAdapter();
@@ -184,7 +185,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
     @Override
     protected void onDestroy() {
         // TODO Auto-generated method stub
-        mImageWorker.getLoadingBitmap().recycle();
+//        mImageWorker.getLoadingBitmap().recycle();
         super.onDestroy();
     }
 
@@ -197,7 +198,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         // TODO Auto-generated method stub
         mImageWidth = mHroizontalListView.getWidth();
         mImageHeight = mHroizontalListView.getHeight();
-        Log.d("zhaocheng", "mImageWidth="+mImageWidth+" mImageHeight="+mImageHeight);
+        Log.d("zhaocheng", "mImageWidth=" + mImageWidth + " mImageHeight=" + mImageHeight);
         mImageWorker.setImageSize(mImageWidth, mImageHeight);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.empty_photo);
         Bitmap resizeB = Bitmap.createScaledBitmap(b, mImageWidth, mImageHeight, false);
@@ -231,13 +232,13 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         @Override
         public int getCount() {
             // TODO Auto-generated method stub
-            return mImageViewList.size();
+            return mImageCount;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             // TODO Auto-generated method stub
-            ImageView v = mImageViewList.get(position);
+            ImageView v = mImageViewList.get(position%IMAGE_PAGE_COUNT);
             mImageWorker.releaseImage(position, v);
             container.removeView(v);
         }
@@ -245,7 +246,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             // TODO Auto-generated method stub
-            ImageView v = mImageViewList.get(position);
+            ImageView v = mImageViewList.get(position%IMAGE_PAGE_COUNT);
             mImageWorker.loadImage(position, v);
             container.addView(v);
             return v;
@@ -330,7 +331,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
 
     private void doImageMatrix_E(int position, int positionOffsetPixels) {
         // TODO Auto-generated method stub
-        ImageView iv = mImageViewList.get(position);
+        ImageView iv = mImageViewList.get(position%IMAGE_PAGE_COUNT);
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
@@ -358,7 +359,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
 
     private void doImageMatrix_S(int position, int positionOffsetPixels) {
         // TODO Auto-generated method stub
-        ImageView iv = mImageViewList.get(position);
+        ImageView iv = mImageViewList.get(position%IMAGE_PAGE_COUNT);
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
@@ -387,7 +388,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
     private void allocateImageView() {
         // TODO Auto-generated method stub
         mImageViewList.clear();
-        for(int i=0;i<mImageCount;i++) {
+        for(int i=0;i<IMAGE_PAGE_COUNT;i++) {
             ImageView iv = new ImageView(this);
             iv.setScaleType(ScaleType.MATRIX);
             measureView(iv);
@@ -401,13 +402,13 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         // TODO Auto-generated method stub
 //        Log.d(TAG, "position="+position+" positionOffset="+positionOffset+ "positionOffsetPixels="+positionOffsetPixels);
-        if (mImageViewList.size() > 1) {
+        if (mImageCount > 1) {
             if (positionOffsetPixels > 0 && positionOffsetPixels < mImageWidth) {
                 doImageMatrix_S(position, positionOffsetPixels);
                 doImageMatrix_E(position+1, mImageWidth-positionOffsetPixels);
             } else if (positionOffsetPixels == 0) {
-                if (mImageViewList.size() > position) {
-                    mImageViewList.get(position).setImageMatrix(null);
+                if (mImageCount > position) {
+                    mImageViewList.get(position%IMAGE_PAGE_COUNT).setImageMatrix(null);
                 }
             }
         }

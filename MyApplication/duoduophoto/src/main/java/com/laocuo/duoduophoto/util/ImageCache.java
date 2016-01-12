@@ -172,12 +172,13 @@ public class ImageCache {
 
     // Add to memory cache
     if (mMemoryCache != null && mMemoryCache.get(data) == null) {
-      Log.d(TAG,"add:"+data);
+      Log.d(TAG,"mMemoryCache add:"+data);
       mMemoryCache.put(data, bitmap);
     }
 
     // Add to disk cache
     if (mDiskCache != null && !mDiskCache.containsKey(data)) {
+      Log.d(TAG,"mDiskCache add:"+data);
       mDiskCache.put(data, bitmap);
     }
   }
@@ -204,14 +205,7 @@ public class ImageCache {
 
   public void releaseBitmapFromMemCache(String data) {
     if (mMemoryCache != null) {
-      Bitmap b = mMemoryCache.remove(data);
-      if (b != null) {
-          Log.d(TAG, "rel:" + data);
-          if (!b.isRecycled()) {
-              Log.d(TAG, "b.recycle();");
-              b.recycle();
-          }
-      }
+        mMemoryCache.remove(data);
     }
   }
 
