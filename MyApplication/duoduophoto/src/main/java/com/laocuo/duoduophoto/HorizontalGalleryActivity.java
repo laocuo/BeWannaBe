@@ -161,6 +161,8 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         prefsEditor.putString(DUODUO_PHOTO_PATH, reset_dir);
         prefsEditor.apply();
         duoduo_photo_path = reset_dir;
+        mHroizontalListView.setAdapter(null);
+        mHorizontalAdapter = null;
         if (mPathList != null) {
             mPathList.clear();
             mImageCount = 0;
@@ -169,9 +171,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
             mPathList = Utils.getAllPhotoPaths(duoduo_photo_path);
             mImageCount = mPathList.size();
         }
-        mHroizontalListView.setAdapter(null);
-        mHorizontalAdapter = null;
-        allocateImageView();
         releaseImageCache();
         if (mImageCount > 0) {
             empty.setVisibility(View.GONE);
