@@ -86,7 +86,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         allocateImageView();
         mProgressBar = (ProgressBar)findViewById(R.id.hroizontal_list_progressbar);
         mHroizontalListView = (CustomViewPager)findViewById(R.id.hroizontal_list);
-        /*mHorizontalAdapter = new HorizontalAdapter();*/
         mHroizontalListView.setOnPageChangeListener(this);
         duoduo_photo_path = mPrefs.getString(DUODUO_PHOTO_PATH, Utils.getDefaultPhotoPath());
         if (duoduo_photo_path != null) {
@@ -197,7 +196,7 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         // TODO Auto-generated method stub
         mImageWidth = mHroizontalListView.getWidth();
         mImageHeight = mHroizontalListView.getHeight();
-        Log.d("zhaocheng", "mImageWidth=" + mImageWidth + " mImageHeight=" + mImageHeight);
+        Log.d(TAG, "mImageWidth=" + mImageWidth + " mImageHeight=" + mImageHeight);
         mImageWorker.setImageSize(mImageWidth, mImageHeight);
         Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.empty_photo);
         Bitmap resizeB = Bitmap.createScaledBitmap(b, mImageWidth, mImageHeight, false);
@@ -334,7 +333,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
-//        Log.d(TAG, "doImageMatrix_E:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
         float mHeight = 0;
         if (mIsOutTheScreen == true) {
             mHeight = (mStepGapY/2) * (1 - Math.abs(movePos-mImageWidth/2) / (mImageWidth/2));
@@ -362,7 +360,6 @@ public class HorizontalGalleryActivity extends Activity implements OnPageChangeL
         float movePos = positionOffsetPixels;
         float mStepGapX = movePos * (SCALE_X + 1) / SCALE_X;
         float mStepGapY = movePos / SCALE_Y;
-//        Log.d(TAG, "doImageMatrix_S:mStepGapX="+mStepGapX+" mStepGapY="+mStepGapY);
         float mHeight = 0;
         if (mIsOutTheScreen == true) {
             mHeight = (mStepGapY/2) * (1 - Math.abs(movePos-mImageWidth/2) / (mImageWidth/2));
