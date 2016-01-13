@@ -259,8 +259,8 @@ public class MainView extends View {
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 // TODO Auto-generated method stub
-                                selectedChess.setVisibility(View.GONE);
-                                servicehandler.sendEmptyMessage(INVALIDATE);
+//                                selectedChess.setVisibility(View.GONE);
+//                                servicehandler.sendEmptyMessage(INVALIDATE);
                                 moveSon(point_list.get(selectedId), point_list.get(end));
                                 String rec = saveChessRecordList(point_list.get(end).dir, selectedId,end);
                                 if (rec != null) {
@@ -744,6 +744,7 @@ public class MainView extends View {
                 case UPDATE: {
                     eatSon(msg.arg1, point_list);
                     back_to_init();
+                    selectedChess.setVisibility(View.GONE);
                     servicehandler.sendEmptyMessage(CHECKEND);
                     break;
                 }
@@ -764,7 +765,7 @@ public class MainView extends View {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             // TODO Auto-generated method stub
-                            selectedChess.setVisibility(View.GONE);
+//                            selectedChess.setVisibility(View.GONE);
                             moveSon(point_list.get(start), point_list.get(end));
                             saveChessRecordList(point_list.get(end).dir, start,end);
                             Message m = servicehandler.obtainMessage();
@@ -778,6 +779,7 @@ public class MainView extends View {
                 case COM_UPDATE: {
                     eatSon(msg.arg1, point_list);
                     back_to_init();
+                    selectedChess.setVisibility(View.GONE);
                     servicehandler.sendEmptyMessage(COM_CHECKEND);
                     break;
                 }
