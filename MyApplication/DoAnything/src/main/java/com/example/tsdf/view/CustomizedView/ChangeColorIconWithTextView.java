@@ -59,9 +59,7 @@ public class ChangeColorIconWithTextView extends View
         mTextPaint = new Paint();
         mTextPaint.setTextSize(mTextSize);
         mTextPaint.setColor(0xff555555);
-        // 得到text绘制范围
-        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
-        setPadding(10, 10, 10, 10);
+        setPadding(10, 20, 10, 20);
     }
 
     /**
@@ -252,6 +250,9 @@ public class ChangeColorIconWithTextView extends View
         mIconBitmap = BitmapFactory.decodeResource(getResources(), icon);
         mText = s;
         mColor = Color.RED;
-        mTextSize = 10;
+        mTextSize = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics());
+        // 得到text绘制范围
+        mTextPaint.getTextBounds(mText, 0, mText.length(), mTextBound);
     }
 }

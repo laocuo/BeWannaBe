@@ -31,6 +31,7 @@ import com.example.tsdf.R;
  */
 public class ColorfulPagerIndicator extends LinearLayout
 {
+    private final String TAG = "ColorfulPagerIndicator";
     /**
      * 绘制三角形的画笔
      */
@@ -176,6 +177,7 @@ public class ColorfulPagerIndicator extends LinearLayout
      */
     public void setTabItemTitles(List<String> datas, List<Integer> iconList)
     {
+        Log.d(TAG, "setTabItemTitles");
         // 如果传入的list有值，则移除布局文件中设置的view
         if (datas != null && datas.size() > 0)
         {
@@ -239,10 +241,6 @@ public class ColorfulPagerIndicator extends LinearLayout
             @Override
             public void onPageSelected(int position)
             {
-                // 设置字体颜色高亮
-                resetTextViewColor();
-                highLightTextView(position);
-
                 // 回调
                 if (onPageChangeListener != null)
                 {
@@ -264,6 +262,10 @@ public class ColorfulPagerIndicator extends LinearLayout
 
                     left.setIconAlpha(1 - positionOffset);
                     right.setIconAlpha(positionOffset);
+                } else {
+                    // 设置字体颜色高亮
+                    resetTextViewColor();
+                    highLightTextView(position);
                 }
 
                 // 回调
@@ -422,7 +424,6 @@ public class ColorfulPagerIndicator extends LinearLayout
     @Override
     protected void onFinishInflate()
     {
-        Log.e("TAG", "onFinishInflate");
         super.onFinishInflate();
 
         int cCount = getChildCount();

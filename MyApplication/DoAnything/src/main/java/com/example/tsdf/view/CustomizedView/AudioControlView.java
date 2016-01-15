@@ -101,7 +101,7 @@ public class AudioControlView extends View {
     protected void onDraw(Canvas canvas)
     {
         int centre = getWidth() / 2; // 获取圆心的x坐标
-        int radius = centre - mCircleWidth / 2 - 20;// 半径
+        int radius = centre - mCircleWidth / 2;// 半径
         /**
          * 画块块去
          */
