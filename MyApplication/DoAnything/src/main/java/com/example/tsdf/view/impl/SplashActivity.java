@@ -80,11 +80,10 @@ public class SplashActivity extends Activity implements ISplashView {
     }
 
     public void moveToSelectView() {
-        LogUtils.print("moveToSelectView");
         if (mAD == null) {
             AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
             String[] mItemName = {
-                    "MainActivity", "SubActivity", "ThirdActivity"
+                    "MainActivity", "SubActivity", "ThirdActivity", "FouthActivity"
             };
             mAlertDialog.setItems(mItemName, new OnClickListener() {
 
@@ -95,8 +94,10 @@ public class SplashActivity extends Activity implements ISplashView {
                         startActivity(new Intent(mContext, MainActivity.class));
                     } else if (arg1 == 1){
                         startActivity(new Intent(mContext, SubActivity.class));
-                    } else {
+                    } else if (arg1 == 2){
                         startActivity(new Intent(mContext, ThirdActivity.class));
+                    } else {
+                        startActivity(new Intent(mContext, FouthActivity.class));
                     }
                     finish();
                 }

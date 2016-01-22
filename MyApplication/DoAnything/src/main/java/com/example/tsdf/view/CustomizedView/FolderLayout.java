@@ -9,8 +9,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+//import android.view.GestureDetector;
+//import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,23 +29,18 @@ public class FolderLayout extends ViewGroup {
     private Matrix mShadowGradientMatrix;
     private LinearGradient mShadowGradientShader;
     private float singleWidth, singleRealWidth, depth;
-    private GestureDetector mScrollGestureDetector;
+//    private GestureDetector mScrollGestureDetector;
     private int mTranslation = -1;
 
     public FolderLayout(Context context) {
         super(context);
-    }
-
-    public FolderLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
         mSolidPaint = new Paint();
         mSolidPaint.setStyle(Paint.Style.FILL);
         mSolidPaint.setColor(Color.BLACK);
 
         mShadowPaint = new Paint();
         mShadowPaint.setStyle(Paint.Style.FILL);
-        mShadowGradientShader = new LinearGradient(0,0,0.5f,0,Color.BLACK,Color.TRANSPARENT,Shader.TileMode.CLAMP);
+        mShadowGradientShader = new LinearGradient(0,0,0.5f,0,Color.BLACK,Color.TRANSPARENT, Shader.TileMode.CLAMP);
         mShadowPaint.setShader(mShadowGradientShader);
         mShadowGradientMatrix = new Matrix();
 
@@ -54,12 +49,30 @@ public class FolderLayout extends ViewGroup {
         }
     }
 
-    public void init(Context context, AttributeSet attrs)
-    {
-        mScrollGestureDetector = new GestureDetector(context,
-                new ScrollGestureDetector());
+    public FolderLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
+//        init(context, attrs);
+        mSolidPaint = new Paint();
+        mSolidPaint.setStyle(Paint.Style.FILL);
+        mSolidPaint.setColor(Color.BLACK);
 
+        mShadowPaint = new Paint();
+        mShadowPaint.setStyle(Paint.Style.FILL);
+        mShadowGradientShader = new LinearGradient(0,0,0.5f,0,Color.BLACK,Color.TRANSPARENT, Shader.TileMode.CLAMP);
+        mShadowPaint.setShader(mShadowGradientShader);
+        mShadowGradientMatrix = new Matrix();
+
+        for(int i=0;i<FOLDER_COUNT;i++) {
+            mMatrix[i] = new Matrix();
+        }
     }
+
+//    public void init(Context context, AttributeSet attrs)
+//    {
+//        mScrollGestureDetector = new GestureDetector(context,
+//                new ScrollGestureDetector());
+//
+//    }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -73,13 +86,14 @@ public class FolderLayout extends ViewGroup {
     private void updateFolder() {
         width = getMeasuredWidth();
         height = getMeasuredHeight();
-        mSolidPaint.setAlpha((int) ((1 - folder_scale) * 255));
-        mShadowPaint.setAlpha((int) ((1 - folder_scale) * 255));
+        mSolidPaint.setAlpha((int) ((1 - folder_scale) * 255 * 0.8));
+        mShadowPaint.setAlpha((int) ((1 - folder_scale) * 255 * 0.8));
         singleWidth = width/FOLDER_COUNT;
         singleRealWidth = singleWidth * folder_scale;
         depth = (float) Math.sqrt(singleWidth*singleWidth-singleRealWidth*singleRealWidth)/2;
         mShadowGradientMatrix.setScale(singleWidth, 1);
         mShadowGradientShader.setLocalMatrix(mShadowGradientMatrix);
+        float anchorPoint = folder_scale * width;
         float[] src = new float[8];
         float[] dst = new float[8];
         for(int i=0;i<FOLDER_COUNT;i++) {
@@ -94,7 +108,8 @@ public class FolderLayout extends ViewGroup {
 
             boolean isEven = i % 2 == 0;
 
-            dst[0] = i * singleRealWidth;
+//            dst[0] = i * singleRealWidth;
+            dst[0] = i * singleRealWidth + width - anchorPoint;
             dst[1] = isEven ? 0 : depth;
             dst[2] = dst[0] + singleRealWidth;
             dst[3] = isEven ? depth : 0;
@@ -124,8 +139,9 @@ public class FolderLayout extends ViewGroup {
     @Override
     protected void dispatchDraw(Canvas canvas) {
 //        super.dispatchDraw(canvas);
-        if (mTranslation == -1)
-            mTranslation = getWidth();
+        if (mTranslation == -1) {
+            mTranslation = (int) (getWidth() * folder_scale);
+        }
         if (folder_scale == 0) {
             return;
         }
@@ -146,6 +162,7 @@ public class FolderLayout extends ViewGroup {
             } else {
                 canvas.drawBitmap(mBitmap,0,0,null);
             }
+            super.dispatchDraw(canvas);
             canvas.translate(singleWidth * i, 0);
             if (i % 2 == 0) {
                 canvas.drawRect(0, 0, singleWidth, height,
@@ -158,48 +175,51 @@ public class FolderLayout extends ViewGroup {
         }
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        return mScrollGestureDetector.onTouchEvent(event);
-    }
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event)
+//    {
+//        return mScrollGestureDetector.onTouchEvent(event);
+//        return super.onTouchEvent(event);
+//    }
 
-    class ScrollGestureDetector extends GestureDetector.SimpleOnGestureListener
-    {
-        @Override
-        public boolean onDown(MotionEvent e)
-        {
-            return true;
-        }
-
-        @Override
-        public boolean onScroll(MotionEvent e1, MotionEvent e2,
-                                float distanceX, float distanceY)
-        {
-            mTranslation -= distanceX;
-
-            if (mTranslation < 0)
-            {
-                mTranslation = 0;
-            }
-            if (mTranslation > getWidth())
-            {
-                mTranslation = getWidth();
-            }
-
-            float factor = Math.abs(((float) mTranslation)
-                    / ((float) getWidth()));
-
-            setScale(factor);
-
-            return true;
-        }
-    }
+//    class ScrollGestureDetector extends GestureDetector.SimpleOnGestureListener
+//    {
+//        @Override
+//        public boolean onDown(MotionEvent e)
+//        {
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+//                                float distanceX, float distanceY)
+//        {
+//            mTranslation -= distanceX;
+//
+//            if (mTranslation < 0)
+//            {
+//                mTranslation = 0;
+//            }
+//            if (mTranslation > getWidth())
+//            {
+//                mTranslation = getWidth();
+//            }
+//
+//            float factor = Math.abs(((float) mTranslation)
+//                    / ((float) getWidth()));
+//
+//            setScale(factor);
+//
+//            return true;
+//        }
+//    }
 
     public void setScale(float scale) {
         if (folder_scale != scale) {
             folder_scale = scale;
-            updateFolder();
+            if (folder_scale > 0 && folder_scale < 1f) {
+                updateFolder();
+            }
             invalidate();
         }
     }

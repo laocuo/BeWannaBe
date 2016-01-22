@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folder_list_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tsdf.view.impl.FouthActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Content"
+        android:textSize="20sp"/>
+    <com.example.tsdf.view.CustomizedView.FolderLayout
+        android:id="@+id/folder_list_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="left">
+        <ListView
+            android:id="@+id/folder_list"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:background="#FFB5C5" />
+    </com.example.tsdf.view.CustomizedView.FolderLayout>
+</android.support.v4.widget.DrawerLayout>
