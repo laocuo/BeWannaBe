@@ -1,6 +1,7 @@
 package com.example.tsdf.view.CustomizedView;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,6 +15,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tsdf.R;
+
+
 /**
  * Created by administrator on 1/21/16.
  */
@@ -22,7 +26,7 @@ public class FolderLayout extends ViewGroup {
     private float folder_scale = 1.0f;
     private boolean isFirst = true;
     private int width,height;
-    private Bitmap mBitmap;
+    private Bitmap mBitmap = null;
     private Canvas mCanvas = new Canvas();
     private Matrix mMatrix[] = new Matrix[FOLDER_COUNT];
     private Paint mShadowPaint, mSolidPaint;
@@ -32,26 +36,35 @@ public class FolderLayout extends ViewGroup {
 //    private GestureDetector mScrollGestureDetector;
     private int mTranslation = -1;
 
+    //default value is false, means folder from left to right
+    private boolean mFolderOrientation = false;
+
     public FolderLayout(Context context) {
         super(context);
-        mSolidPaint = new Paint();
-        mSolidPaint.setStyle(Paint.Style.FILL);
-        mSolidPaint.setColor(Color.BLACK);
-
-        mShadowPaint = new Paint();
-        mShadowPaint.setStyle(Paint.Style.FILL);
-        mShadowGradientShader = new LinearGradient(0,0,0.5f,0,Color.BLACK,Color.TRANSPARENT, Shader.TileMode.CLAMP);
-        mShadowPaint.setShader(mShadowGradientShader);
-        mShadowGradientMatrix = new Matrix();
-
-        for(int i=0;i<FOLDER_COUNT;i++) {
-            mMatrix[i] = new Matrix();
-        }
+//        mSolidPaint = new Paint();
+//        mSolidPaint.setStyle(Paint.Style.FILL);
+//        mSolidPaint.setColor(Color.BLACK);
+//
+//        mShadowPaint = new Paint();
+//        mShadowPaint.setStyle(Paint.Style.FILL);
+//        mShadowGradientShader = new LinearGradient(0,0,0.5f,0,Color.BLACK,Color.TRANSPARENT, Shader.TileMode.CLAMP);
+//        mShadowPaint.setShader(mShadowGradientShader);
+//        mShadowGradientMatrix = new Matrix();
+//
+//        for(int i=0;i<FOLDER_COUNT;i++) {
+//            mMatrix[i] = new Matrix();
+//        }
     }
 
     public FolderLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 //        init(context, attrs);
+        TypedArray a = context.getResources().obtainAttributes(attrs, R.styleable.FolderLayout);
+        String orientation = a.getString(R.styleable.FolderLayout_orientation);
+        if (!orientation.equals("left")) {
+            mFolderOrientation = true;
+        }
+        a.recycle();
         mSolidPaint = new Paint();
         mSolidPaint.setStyle(Paint.Style.FILL);
         mSolidPaint.setColor(Color.BLACK);
@@ -78,9 +91,11 @@ public class FolderLayout extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         View v = getChildAt(0);
         v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        mBitmap = Bitmap.createBitmap(v.getMeasuredWidth(), v.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        mCanvas.setBitmap(mBitmap);
-        updateFolder();
+        if (mBitmap == null) {
+            mBitmap = Bitmap.createBitmap(v.getMeasuredWidth(), v.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+            mCanvas.setBitmap(mBitmap);
+            updateFolder();
+        }
     }
 
     private void updateFolder() {
@@ -108,8 +123,11 @@ public class FolderLayout extends ViewGroup {
 
             boolean isEven = i % 2 == 0;
 
-//            dst[0] = i * singleRealWidth;
-            dst[0] = i * singleRealWidth + width - anchorPoint;
+            if (mFolderOrientation == true) {
+                dst[0] = i * singleRealWidth + width - anchorPoint;
+            } else {
+                dst[0] = i * singleRealWidth;
+            }
             dst[1] = isEven ? 0 : depth;
             dst[2] = dst[0] + singleRealWidth;
             dst[3] = isEven ? depth : 0;
@@ -130,7 +148,6 @@ public class FolderLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         View v = getChildAt(0);
         measureChild(v, widthMeasureSpec, heightMeasureSpec);
         setMeasuredDimension(v.getMeasuredWidth(), v.getMeasuredHeight());
@@ -138,7 +155,6 @@ public class FolderLayout extends ViewGroup {
 
     @Override
     protected void dispatchDraw(Canvas canvas) {
-//        super.dispatchDraw(canvas);
         if (mTranslation == -1) {
             mTranslation = (int) (getWidth() * folder_scale);
         }

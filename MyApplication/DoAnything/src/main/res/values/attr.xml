@@ -40,4 +40,8 @@
     <declare-styleable name="ViewPagerIndicator">
         <attr name="item_visiable" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="FolderLayout">
+        <attr name="orientation" format="string" />
+    </declare-styleable>
 </resources>
