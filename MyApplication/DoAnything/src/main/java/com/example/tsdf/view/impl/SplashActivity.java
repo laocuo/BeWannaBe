@@ -83,7 +83,7 @@ public class SplashActivity extends Activity implements ISplashView {
         if (mAD == null) {
             AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
             String[] mItemName = {
-                    "MainActivity", "SubActivity", "ThirdActivity", "FouthActivity"
+                    "MainActivity", "SubActivity", "ThirdActivity"
             };
             mAlertDialog.setItems(mItemName, new OnClickListener() {
 

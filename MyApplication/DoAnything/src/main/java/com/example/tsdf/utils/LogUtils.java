@@ -4,6 +4,7 @@ package com.example.tsdf.utils;
 import com.example.tsdf.R;
 import com.example.tsdf.view.fragment.AudioControlFragment;
 import com.example.tsdf.view.fragment.BinarySlidingFragment;
+import com.example.tsdf.view.fragment.CircleListFragment;
 import com.example.tsdf.view.fragment.ContentFragment;
 //import com.example.tsdf.view.fragment.ContentFragment;
 import com.example.tsdf.view.fragment.GalleryShowFragment;
@@ -33,7 +34,8 @@ public class LogUtils {
             R.string.title_section2,
             R.string.title_section3,
             R.string.title_section4,
-            R.string.title_section5
+            R.string.title_section5,
+            R.string.title_section6
     };
 
     private static int[] mIconList = {
@@ -48,7 +50,8 @@ public class LogUtils {
             NetEasyFragment.class,
             AudioControlFragment.class,
             ViewDragFragment.class,
-            ZoomViewFragment.class
+            ZoomViewFragment.class,
+            CircleListFragment.class
     };
 
     public static int[] getStringList() {
