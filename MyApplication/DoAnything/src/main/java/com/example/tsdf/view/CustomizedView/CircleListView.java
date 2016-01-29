@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +13,7 @@ import android.view.View;
 import com.example.tsdf.utils.DensityUtils;
 import com.example.tsdf.utils.L;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by administrator on 1/26/16.
@@ -27,8 +25,8 @@ public class CircleListView extends View {
     private final int TEXT_ICON_GAP = 2;
     private final int PADDING = 4;
     private final int FAST_MOVE_VALUE = 6;
-    private List<Integer> list = null;
-    private List<Integer> iconList = null;
+    private ArrayList<String> titleList = null;
+    private ArrayList<Bitmap> iconList = null;
     private int width, height;
     private Paint mPaint;
     private int mCount;
@@ -38,6 +36,7 @@ public class CircleListView extends View {
     private Context mContext;
     private int mBg_Color,mContentBg_Color,mContentBg_SelectColor,mText_Color;
     private OnCircleListItemListener mOnCircleListItemListener = null;
+    private ItemParams mItemParams = new ItemParams();
 
     public CircleListView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,13 +53,13 @@ public class CircleListView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (list != null && mCount > 0) {
+        if (titleList != null && mCount > 0) {
             drawBackground(canvas);
             for(int i=0;i<mCount;i++) {
                 drawItem(i, canvas);
             }
         } else {
-            super.onDraw(canvas);
+            drawBackground(canvas);
         }
     }
 
@@ -68,34 +67,32 @@ public class CircleListView extends View {
         float hudu = (float) ((mInitAngel + i*mSpiltAngel) * 2*Math.PI/360);
         float x = mRadius + (float) (mRadius * 3/4 * Math.sin(hudu));
         float y = mRadius - (float) (mRadius * 3/4 * Math.cos(hudu));
-        ItemParams ip = new ItemParams();
-        String title = mContext.getResources().getString(list.get(i));
-        Drawable icon = mContext.getResources().getDrawable(iconList.get(i));
-        BitmapDrawable bd = (BitmapDrawable) icon;
+        String title = titleList.get(i);
+        Bitmap icon = iconList.get(i);
         Rect rect = new Rect();
         mPaint.getTextBounds(title, 0, title.length(), rect);
-        int mwidth = Math.max(icon.getIntrinsicWidth(), rect.width()) + PADDING;
-        int mheight = icon.getIntrinsicHeight() + rect.height() + TEXT_ICON_GAP;
-        ip.title_x = x - mwidth / 2 + (mwidth - rect.width()) / 2;
-        ip.title_y = y - mheight / 2 + rect.height();
-        ip.icon_x = x - mwidth / 2 + (mwidth - icon.getIntrinsicWidth()) / 2;
-        ip.icon_y = y - mheight / 2 + rect.height() + TEXT_ICON_GAP;
+        int mwidth = Math.max(icon.getWidth(), rect.width()) + PADDING;
+        int mheight = icon.getHeight() + rect.height() + TEXT_ICON_GAP;
+        mItemParams.title_x = x - mwidth / 2 + (mwidth - rect.width()) / 2;
+        mItemParams.title_y = y - mheight / 2 + rect.height();
+        mItemParams.icon_x = x - mwidth / 2 + (mwidth - icon.getWidth()) / 2;
+        mItemParams.icon_y = y - mheight / 2 + rect.height() + TEXT_ICON_GAP;
         rect.left = (int) (x - mwidth / 2);
         rect.top = (int) (y - mheight / 2);
         rect.right = (int) (x + mwidth / 2);
         rect.bottom = (int) (y + mheight / 2);
-        ip.rect = rect;
-        ip.title = title;
-        ip.icon = bd.getBitmap();
+        mItemParams.rect = rect;
+        mItemParams.title = title;
+        mItemParams.icon = icon;
         if (mClickItemIndex == i) {
             mPaint.setColor(mContentBg_SelectColor);
         } else {
             mPaint.setColor(mContentBg_Color);
         }
-        canvas.drawRect(ip.rect.left, ip.rect.top, ip.rect.right, ip.rect.bottom, mPaint);
+        canvas.drawRect(mItemParams.rect.left, mItemParams.rect.top, mItemParams.rect.right, mItemParams.rect.bottom, mPaint);
         mPaint.setColor(mText_Color);
-        canvas.drawText(ip.title, ip.title_x, ip.title_y, mPaint);
-        canvas.drawBitmap(ip.icon, ip.icon_x, ip.icon_y, mPaint);
+        canvas.drawText(mItemParams.title, mItemParams.title_x, mItemParams.title_y, mPaint);
+        canvas.drawBitmap(mItemParams.icon, mItemParams.icon_x, mItemParams.icon_y, mPaint);
     }
 
     private void drawBackground(Canvas canvas) {
@@ -103,7 +100,7 @@ public class CircleListView extends View {
         mPaint.setColor(mBg_Color);
         canvas.drawCircle(mRadius, mRadius, mRadius, mPaint);
         mPaint.setColor(mContentBg_Color);
-        canvas.drawCircle(mRadius,mRadius,mRadius/2,mPaint);
+        canvas.drawCircle(mRadius, mRadius, mRadius / 2, mPaint);
     }
 
     @Override
@@ -115,12 +112,10 @@ public class CircleListView extends View {
         setMeasuredDimension(width, height);
     }
 
-    public void setListContent(List<Integer> list, List<Integer> iconList) {
-        this.list = list;
+    public void setListContent(ArrayList<String> titleList, ArrayList<Bitmap> iconList) {
+        this.titleList = titleList;
         this.iconList = iconList;
         init();
-        center.setPosition(width/2, width/2);
-        invalidate();
     }
 
     public void setOnCircleListItemListener (OnCircleListItemListener l){
@@ -128,8 +123,10 @@ public class CircleListView extends View {
     }
 
     private void init() {
-        mCount = list.size();
+        mCount = titleList.size();
         mSpiltAngel = 360/mCount;
+        center.setPosition(width/2, width/2);
+        invalidate();
     }
 
     private Point prev = new Point(), next = new Point(), center = new Point();
@@ -177,7 +174,6 @@ public class CircleListView extends View {
             }
         }
         return true;
-//        return super.dispatchTouchEvent(event);
     }
 
     private int calcWhichItemClick(Point prev) {
@@ -185,12 +181,12 @@ public class CircleListView extends View {
             float hudu = (float) ((mInitAngel + i*mSpiltAngel) * 2*Math.PI/360);
             float x = mRadius + (float) (mRadius * 3/4 * Math.sin(hudu));
             float y = mRadius - (float) (mRadius * 3/4 * Math.cos(hudu));
-            String title = mContext.getResources().getString(list.get(i));
-            Drawable icon = mContext.getResources().getDrawable(iconList.get(i));
+            String title = titleList.get(i);
+            Bitmap icon = iconList.get(i);
             Rect rect = new Rect();
             mPaint.getTextBounds(title, 0, title.length(), rect);
-            int mwidth = Math.max(icon.getIntrinsicWidth(), rect.width());
-            int mheight = icon.getIntrinsicHeight() + rect.height() + TEXT_ICON_GAP;
+            int mwidth = Math.max(icon.getWidth(), rect.width());
+            int mheight = icon.getHeight() + rect.height() + TEXT_ICON_GAP;
             rect.left = (int) (x - mwidth / 2);
             rect.top = (int) (y - mheight / 2);
             rect.right = (int) (x + mwidth / 2);
@@ -217,14 +213,12 @@ public class CircleListView extends View {
         int tempAngel = mInitAngel;
 
         if (next.x > mRadius) {
-            if (mapY < next.y) {
-            } else if (mapY > next.y) {
+            if (mapY > next.y) {
                 angel = angel * -1;
             }
         } else {
             if (mapY < next.y) {
                 angel = angel * -1;
-            } else if (mapY > next.y) {
             }
         }
         tempAngel += angel;
