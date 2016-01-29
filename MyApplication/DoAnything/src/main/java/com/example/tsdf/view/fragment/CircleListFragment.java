@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tsdf.R;
-import com.example.tsdf.utils.LogUtils;
+import com.example.tsdf.utils.L;
 import com.example.tsdf.view.CustomizedView.CircleListView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,9 +32,7 @@ public class CircleListFragment extends Fragment {
             R.drawable.ic_menu_emoticons,
             R.drawable.ic_menu_friendslist,
             R.drawable.ic_menu_myplaces,
-            R.drawable.ic_menu_start_conversation,
-            R.drawable.ic_menu_contact,
-            R.drawable.ic_menu_duration);
+            R.drawable.ic_menu_start_conversation);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +44,12 @@ public class CircleListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_circlelist, container, false);
         mCircleListView = (CircleListView) v.findViewById(R.id.circle_list);
         mCircleListView.setListContent(list, iconList);
+        mCircleListView.setOnCircleListItemListener(new CircleListView.OnCircleListItemListener() {
+            @Override
+            public void OnCircleListItemClick(int pos) {
+                L.d("OnCircleListItemClick pos = " + pos);
+            }
+        });
         return v;
     }
 }
