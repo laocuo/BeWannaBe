@@ -22,6 +22,7 @@ public class CircleListView extends View {
     public interface OnCircleListItemListener {
         void OnCircleListItemClick(int pos);
     }
+    private boolean isRotateItem = true;
     private final int TEXT_ICON_GAP = 2;
     private final int PADDING = 4;
     private final int FAST_MOVE_VALUE = 6;
@@ -89,10 +90,15 @@ public class CircleListView extends View {
         } else {
             mPaint.setColor(mContentBg_Color);
         }
+        canvas.save();
+        if (isRotateItem == true) {
+            canvas.rotate(mInitAngel + i*mSpiltAngel, x, y);
+        }
         canvas.drawRect(mItemParams.rect.left, mItemParams.rect.top, mItemParams.rect.right, mItemParams.rect.bottom, mPaint);
         mPaint.setColor(mText_Color);
         canvas.drawText(mItemParams.title, mItemParams.title_x, mItemParams.title_y, mPaint);
         canvas.drawBitmap(mItemParams.icon, mItemParams.icon_x, mItemParams.icon_y, mPaint);
+        canvas.restore();
     }
 
     private void drawBackground(Canvas canvas) {
