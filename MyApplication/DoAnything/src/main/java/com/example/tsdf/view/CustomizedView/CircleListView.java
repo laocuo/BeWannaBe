@@ -32,7 +32,8 @@ public class CircleListView extends View {
     private Paint mPaint;
     private int mCount;
     private float mRadius;
-    private int mInitAngel = 0, mMoveAngel = 0;
+    private float mInitAngel = 0;
+    private int mMoveAngel = 0;
     private float mSpiltAngel;
     private Context mContext;
     private int mBg_Color,mContentBg_Color,mContentBg_SelectColor,mText_Color;
@@ -92,7 +93,7 @@ public class CircleListView extends View {
         }
         canvas.save();
         if (isRotateItem == true) {
-            canvas.rotate(mInitAngel + i*mSpiltAngel, x, y);
+            canvas.rotate(mInitAngel + i * mSpiltAngel, x, y);
         }
         canvas.drawRect(mItemParams.rect.left, mItemParams.rect.top, mItemParams.rect.right, mItemParams.rect.bottom, mPaint);
         mPaint.setColor(mText_Color);
@@ -102,7 +103,7 @@ public class CircleListView extends View {
     }
 
     private void drawBackground(Canvas canvas) {
-        mRadius = width/2;
+        mRadius = width / 2;
         mPaint.setColor(mBg_Color);
         canvas.drawCircle(mRadius, mRadius, mRadius, mPaint);
         mPaint.setColor(mContentBg_Color);
@@ -114,6 +115,7 @@ public class CircleListView extends View {
         if (width <= 0) {
             width = MeasureSpec.getSize(widthMeasureSpec);
             height = width;
+            center.setPosition(width/2, width/2);
         }
         setMeasuredDimension(width, height);
     }
@@ -131,7 +133,6 @@ public class CircleListView extends View {
     private void init() {
         mCount = titleList.size();
         mSpiltAngel = 360/mCount;
-        center.setPosition(width/2, width/2);
         invalidate();
     }
 
@@ -159,7 +160,7 @@ public class CircleListView extends View {
                 break;
             }
             case MotionEvent.ACTION_UP: {
-                if (mMoveAngel == 0){
+                if (Math.abs(mMoveAngel) < 1) {
                     int pos = mClickItemIndex;
                     mClickItemIndex = -1;
                     invalidate();
@@ -168,13 +169,12 @@ public class CircleListView extends View {
                             mOnCircleListItemListener.OnCircleListItemClick(pos);
                         }
                     }
-                } else {
-                    if (Math.abs(mMoveAngel) > FAST_MOVE_VALUE) {
+                }
+                if (Math.abs(mMoveAngel) > FAST_MOVE_VALUE) {
                         isRotating = true;
                         post(mAutoRotateRunnable);
-                    } else {
-                        mMoveAngel = 0;
-                    }
+                } else {
+                    mMoveAngel = 0;
                 }
                 break;
             }
@@ -185,8 +185,8 @@ public class CircleListView extends View {
     private int calcWhichItemClick(Point prev) {
         for (int i=0;i<mCount;i++) {
             float hudu = (float) ((mInitAngel + i*mSpiltAngel) * 2*Math.PI/360);
-            float x = mRadius + (float) (mRadius * 3/4 * Math.sin(hudu));
-            float y = mRadius - (float) (mRadius * 3/4 * Math.cos(hudu));
+            float x = (float) (mRadius * 3/4 * Math.sin(hudu));
+            float y = -1 * (float) (mRadius * 3/4 * Math.cos(hudu));
             String title = titleList.get(i);
             Bitmap icon = iconList.get(i);
             Rect rect = new Rect();
@@ -197,7 +197,9 @@ public class CircleListView extends View {
             rect.top = (int) (y - mheight / 2);
             rect.right = (int) (x + mwidth / 2);
             rect.bottom = (int) (y + mheight / 2);
-            if (prev.x < rect.right && prev.x > rect.left && prev.y < rect.bottom && prev.y > rect.top) {
+            Point p = new Point();
+            p.setPosition(prev.x - center.x, prev.y - center.y);
+            if (p.x < rect.right && p.x > rect.left && p.y < rect.bottom && p.y > rect.top) {
                 return i;
             }
         }
@@ -208,15 +210,14 @@ public class CircleListView extends View {
         double a = calcDistance(prev, next);
         double b = calcDistance(center, prev);
         double c = calcDistance(center, next);
-        double cosA = (b*b+c*c-a*b)/(2*b*c);
+        double cosA = (b*b+c*c-a*a)/(2*b*c);
         double hudu = Math.acos(cosA);
         double angel = (hudu*360)/(2*Math.PI);
-        angel = angel / 2;//confuse me, to be continue...
         //y=x*i+j
         float i = (prev.y-mRadius)/(prev.x-mRadius);
         float j = mRadius - mRadius*i;
         float mapY = next.x * i + j;
-        int tempAngel = mInitAngel;
+        float tempAngel = mInitAngel;
 
         if (next.x > mRadius) {
             if (mapY > next.y) {
@@ -232,7 +233,7 @@ public class CircleListView extends View {
             return;
         }
         mClickItemIndex = -1;
-        mMoveAngel = (int) angel * 3;
+        mMoveAngel = (int) angel * 2;
         if (tempAngel >= 360) {
             tempAngel -= 360;
         }
