@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorPrimary"
+    tools:context="com.laocuo.glassball.fragment.GlassGameFragment">
+
+    <com.laocuo.glassball.view.GlassGameView
+        android:id="@+id/glassgamview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
+    </com.laocuo.glassball.view.GlassGameView>
+</FrameLayout>
