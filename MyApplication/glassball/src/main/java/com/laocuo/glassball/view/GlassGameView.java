@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by Laocuo on 2016/4/27.
@@ -23,8 +22,8 @@ import java.util.Random;
 public class GlassGameView extends ViewGroup {
 
     private int mBrickCount = 0;
-    private final int BALL_MOVE_SETP_BEGIN = 6;
-    private int ball_move_step = BALL_MOVE_SETP_BEGIN;
+    private final int BALL_MOVE_SETP_MIN = 6, BALL_MOVE_SETP_MAX = 30;
+    private int ball_move_step = BALL_MOVE_SETP_MIN;
     private boolean bUpdateBall = false;
     private boolean bFirstRun = true;
     private int mScreenWidth, mScreenHeight;
@@ -44,6 +43,14 @@ public class GlassGameView extends ViewGroup {
         this.mContext = context;
         this.mAttributeSet = attrs;
         init(context, attrs);
+        post(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0;i<20;i++) {
+                    addBrick();
+                }
+            }
+        });
     }
 
     private void init(Context context, AttributeSet attrs) {
@@ -190,7 +197,7 @@ public class GlassGameView extends ViewGroup {
         if (y+mBallR > mScreenHeight - mBoardH) {
             if (Math.abs(mBallCenter.x - mBoardCenter.x) < (mBoardW/2 + mBallR)) {
                 mBallCenterYDir = -1*step;
-                ball_move_step ++;
+                ball_move_step = Math.min(ball_move_step+1,BALL_MOVE_SETP_MAX);
             } else {
 //                reset();
                 return false;
@@ -198,21 +205,30 @@ public class GlassGameView extends ViewGroup {
         } else if (y-mBallR < 0) {
             mBallCenterYDir = step;
         }
-        boolean isTouch = checkIfTouchBrick(new Center(mBallCenter.x + mBallCenterXDir, mBallCenter.y + mBallCenterYDir));
-        mBallCenter.x += mBallCenterXDir;
-        if (true == isTouch) {
-            mBallCenterYDir = -1 * mBallCenterYDir;
+        int isTouch = checkIfTouchBrick(new Center(x, y), step);
+
+        if (0 < isTouch) {
+            if (isTouch == 1) {
+                mBallCenterYDir = -1 * mBallCenterYDir;
+            } else if (isTouch == 2) {
+                mBallCenterXDir = -1 * mBallCenterXDir;
+            } else {
+                mBallCenterXDir = -1 * mBallCenterXDir;
+                mBallCenterYDir = -1 * mBallCenterYDir;
+            }
         }
+        mBallCenter.x += mBallCenterXDir;
         mBallCenter.y += mBallCenterYDir;
         return true;
     }
 
     private float mMinDistanceBetweenBallAndBrick = -1;
     private int mMinIndex = -1;
-    private boolean checkIfTouchBrick(Center c) {
-        boolean ret = false;
+
+    private int checkIfTouchBrick(Center c, int step) {
+        int ret = 0;
         if (mBrickMap.size() < 1) {
-            return false;
+            return 0;
         }
         Map map = mBrickMap;
         Iterator iter = map.entrySet().iterator();
@@ -232,11 +248,21 @@ public class GlassGameView extends ViewGroup {
             }
         }
         BrickView bv = mBrickMap.get(mMinIndex);
-        if ((Math.abs(c.x - bv.getmCenter().x) <= mBallR + mBrickW/2) &&
-            (Math.abs(c.y - bv.getmCenter().y) <= mBallR + mBrickH/2)) {
+        int xDis = Math.abs(c.x - bv.getmCenter().x);
+        int yDis = Math.abs(c.y - bv.getmCenter().y);
+        if ((xDis <= mBallR + mBrickW/2) && (yDis <= mBallR + mBrickH/2)) {
             removeView(bv);
             mBrickMap.remove(mMinIndex);
-            ret = true;
+            if ((xDis >= mBallR + mBrickW/2 - step) &&
+                (yDis >= mBallR + mBrickH/2 - step)) {
+                ret = 3;
+            } else if (xDis >= mBallR + mBrickW/2 - step) {
+                ret = 2;
+            } else if (yDis >= mBallR + mBrickH/2 - step) {
+                ret = 1;
+            } else {
+                ret = 3;
+            }
         }
         mMinDistanceBetweenBallAndBrick = -1;
         mMinIndex = -1;
@@ -252,7 +278,7 @@ public class GlassGameView extends ViewGroup {
     private void reset() {
         mBallCenter.setXY(mScreenWidth / 2, mScreenHeight - mBoardH - mBallR);
         mBoardCenter.setXY(mScreenWidth / 2, mScreenHeight - mBoardH / 2);
-        ball_move_step = BALL_MOVE_SETP_BEGIN;
+        ball_move_step = BALL_MOVE_SETP_MIN;
         mBallCenterXDir = ball_move_step;
         mBallCenterYDir = -1*ball_move_step;
 //        requestLayout();
