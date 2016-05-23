@@ -82,7 +82,7 @@ public class GlassGameFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        mGlassGameView.startUpdateBall();
+        mGlassGameView.startUpdateBall();
     }
 
     @Override

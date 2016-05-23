@@ -33,7 +33,7 @@ public class GlassGameView extends ViewGroup {
     private int mBallCenterXDir = ball_move_step, mBallCenterYDir = -1*ball_move_step;
     private int mBallR = 50;
     private int mBoardW = 400, mBoardH = 70;
-    private int mBrickW = 260, mBrickH = 60;
+    private int mBrickW = 200, mBrickH = 200;
     private HashMap<Integer, BrickView> mBrickMap = new HashMap<>();
     private Handler mHandler;
     private Context mContext;
@@ -187,6 +187,9 @@ public class GlassGameView extends ViewGroup {
 
     private boolean updateBallCenter() {
         int step = ball_move_step;
+        L.d("step:"+step+" mBallCenterXDir:"+mBallCenterXDir+" mBallCenterYDir:"+mBallCenterYDir);
+        mBallCenterXDir = step * mBallCenterXDir / Math.abs(mBallCenterXDir);
+        mBallCenterYDir = step * mBallCenterYDir / Math.abs(mBallCenterYDir);
         int x = mBallCenter.x + mBallCenterXDir;
         int y = mBallCenter.y + mBallCenterYDir;
         if (x+mBallR > mScreenWidth) {
@@ -205,20 +208,14 @@ public class GlassGameView extends ViewGroup {
         } else if (y-mBallR < 0) {
             mBallCenterYDir = step;
         }
+        x = mBallCenter.x + mBallCenterXDir;
+        y = mBallCenter.y + mBallCenterYDir;
+        L.d("Center--x:"+x+" y:"+y);
         int isTouch = checkIfTouchBrick(new Center(x, y), step);
-
-        if (0 < isTouch) {
-            if (isTouch == 1) {
-                mBallCenterYDir = -1 * mBallCenterYDir;
-            } else if (isTouch == 2) {
-                mBallCenterXDir = -1 * mBallCenterXDir;
-            } else {
-                mBallCenterXDir = -1 * mBallCenterXDir;
-                mBallCenterYDir = -1 * mBallCenterYDir;
-            }
+        if (isTouch <= 0) {
+            mBallCenter.x += mBallCenterXDir;
+            mBallCenter.y += mBallCenterYDir;
         }
-        mBallCenter.x += mBallCenterXDir;
-        mBallCenter.y += mBallCenterYDir;
         return true;
     }
 
@@ -240,30 +237,62 @@ public class GlassGameView extends ViewGroup {
             if (mMinDistanceBetweenBallAndBrick < 0) {
                 mMinDistanceBetweenBallAndBrick = distance;
                 mMinIndex = key;
-            } else {
-                if (mMinDistanceBetweenBallAndBrick > distance) {
+            } else if (mMinDistanceBetweenBallAndBrick > distance) {
                     mMinDistanceBetweenBallAndBrick = distance;
                     mMinIndex = key;
-                }
             }
         }
         BrickView bv = mBrickMap.get(mMinIndex);
         int xDis = Math.abs(c.x - bv.getmCenter().x);
         int yDis = Math.abs(c.y - bv.getmCenter().y);
         if ((xDis <= mBallR + mBrickW/2) && (yDis <= mBallR + mBrickH/2)) {
+            L.d("-----S-------");
+            L.d("xDis:"+xDis+" yDis:"+yDis);
+            L.d("mBallR + mBrickW/2:"+(mBallR + mBrickW/2));
+            L.d("mBallR + mBrickH/2:"+(mBallR + mBrickH/2));
+            L.d("step:"+step+" mBallCenterXDir:"+mBallCenterXDir+" mBallCenterYDir:"+mBallCenterYDir);
+            L.d("c:"+c.x+","+c.y);
+            L.d("bv.getmCenter():"+bv.getmCenter().x+","+bv.getmCenter().y);
+            L.d("mBallCenter:"+mBallCenter.x+","+mBallCenter.y);
+            int realxgapDis = Math.abs(mBallCenter.x - bv.getmCenter().x) - mBallR - mBrickW/2;
+            int realygapDis = Math.abs(mBallCenter.y - bv.getmCenter().y) - mBallR - mBrickH/2;
+            L.d("realxgapDis:"+realxgapDis+" realygapDis:"+realygapDis);
+            int minGap = 0;
+            if (realxgapDis >= 0 && realygapDis >=0) {
+                minGap = Math.min(realxgapDis, realygapDis);
+                if (realxgapDis > realygapDis) {
+                    ret = 2;
+                } else if (realxgapDis < realygapDis) {
+                    ret = 1;
+                } else {
+                    ret = 3;
+                }
+            } else if (realxgapDis >= 0) {
+                ret = 2;
+                minGap = realxgapDis;
+            } else if (realygapDis >= 0) {
+                ret = 1;
+                minGap = realygapDis;
+            } else {
+                L.d("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+            }
+            mBallCenter.x += minGap * (mBallCenterXDir/step);
+            mBallCenter.y += minGap * (mBallCenterYDir/step);
+            if (ret == 1) {
+                mBallCenterYDir = -1 * mBallCenterYDir;
+            } else if (ret == 2) {
+                mBallCenterXDir = -1 * mBallCenterXDir;
+            } else if (ret == 3) {
+                mBallCenterXDir = -1 * mBallCenterXDir;
+                mBallCenterYDir = -1 * mBallCenterYDir;
+            }
+            L.d("ret:"+ret);
+            L.d("mBallCenter:"+mBallCenter.x+","+mBallCenter.y);
+            L.d("------E------");
             removeView(bv);
             mBrickMap.remove(mMinIndex);
-            if ((xDis >= mBallR + mBrickW/2 - step) &&
-                (yDis >= mBallR + mBrickH/2 - step)) {
-                ret = 3;
-            } else if (xDis >= mBallR + mBrickW/2 - step) {
-                ret = 2;
-            } else if (yDis >= mBallR + mBrickH/2 - step) {
-                ret = 1;
-            } else {
-                ret = 3;
-            }
         }
+
         mMinDistanceBetweenBallAndBrick = -1;
         mMinIndex = -1;
         return ret;

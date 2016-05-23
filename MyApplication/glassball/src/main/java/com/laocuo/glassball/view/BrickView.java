@@ -46,7 +46,7 @@ public class BrickView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 //        canvas.drawRect(mRect, mPaint);
-        canvas.drawRoundRect(mRect, height/3, height/3, mPaint);
+        canvas.drawRoundRect(mRect, height/5, height/5, mPaint);
     }
 
     @Override

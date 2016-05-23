@@ -46,8 +46,8 @@ public class GlassBallActivity extends Activity
 
     private void initToolBar() {
         mToolbar = (Toolbar) findViewById(R.id.toobar);
-//        mToolbar.setNavigationIcon(android.R.drawable.ic_dialog_map);
-        mToolbar.setLogo(R.drawable.jay);
+//        mToolbar.setNavigationIcon(R.drawable.logo);
+//        mToolbar.setLogo(R.drawable.logo);
         mToolbar.setTitle(R.string.app_name);
         setActionBar(mToolbar);
     }
