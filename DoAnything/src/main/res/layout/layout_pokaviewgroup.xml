@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customize="http://schemas.android.com/apk/res/com.example.tsdf"
+    xmlns:customize="http://schemas.android.com/apk/res/com.example.doanything"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.tsdf.view.CustomizedView.PokaViewGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.example.doanything.view.CustomizedView.PokaViewGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         customize:leftSize="30"
         customize:topSize="60">
 
@@ -34,5 +34,5 @@
             android:gravity="center"
             android:background="#123D05"
             android:text="TEST4"/>
-    </com.example.tsdf.view.CustomizedView.PokaViewGroup>
+    </com.example.doanything.view.CustomizedView.PokaViewGroup>
 </LinearLayout>

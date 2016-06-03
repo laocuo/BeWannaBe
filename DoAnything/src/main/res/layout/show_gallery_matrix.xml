@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <com.example.tsdf.view.CustomizedView.CustomHorizontalScrollView 
+    <com.example.doanything.view.CustomizedView.CustomHorizontalScrollView
         android:id="@+id/gallery_matrix_view"
         android:layout_width="240dp"
         android:layout_height="400dp"
@@ -15,6 +15,6 @@
             android:orientation="horizontal">
             
         </LinearLayout>
-    </com.example.tsdf.view.CustomizedView.CustomHorizontalScrollView>
+    </com.example.doanything.view.CustomizedView.CustomHorizontalScrollView>
 
 </LinearLayout>

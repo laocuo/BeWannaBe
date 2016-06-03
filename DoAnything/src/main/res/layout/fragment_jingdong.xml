@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tsdf.view.fragment.JingdongFragment">
+    tools:context="com.example.doanything.view.fragment.JingdongFragment">
 
-    <com.example.tsdf.view.CustomizedView.DragRefreshScrollView
+    <com.example.doanything.view.CustomizedView.DragRefreshScrollView
         android:id="@+id/jd_content_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -48,7 +48,7 @@
                 android:src="@android:color/darker_gray"/>
             <include layout="@layout/jd_miaosha"/>
         </LinearLayout>
-    </com.example.tsdf.view.CustomizedView.DragRefreshScrollView>
+    </com.example.doanything.view.CustomizedView.DragRefreshScrollView>
 
     <LinearLayout
         android:id="@+id/jd_top_bar"

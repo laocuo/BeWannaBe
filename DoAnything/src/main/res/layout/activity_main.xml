@@ -4,7 +4,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tsdf.MainActivity" >
+    tools:context="com.example.doanything.MainActivity" >
 
     <!--
          As the main content view, the view below consumes the entire
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <com.example.tsdf.tabpager.ViewPagerTabs
+            <com.example.doanything.tabpager.ViewPagerTabs
                 android:id="@+id/pager_header"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_height"
@@ -54,7 +54,7 @@
 
     <fragment
         android:id="@+id/navigation_drawer"
-        android:name="com.example.tsdf.NavigationDrawerFragment"
+        android:name="com.example.doanything.NavigationDrawerFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

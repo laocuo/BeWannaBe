@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customize="http://schemas.android.com/apk/res/com.example.tsdf"
+    xmlns:customize="http://schemas.android.com/apk/res/com.example.doanything"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tsdf.view.impl.ThirdActivity">
+    tools:context="com.example.doanything.view.impl.ThirdActivity">
 
-    <com.example.tsdf.view.CustomizedView.ColorfulPagerIndicator
+    <com.example.doanything.view.CustomizedView.ColorfulPagerIndicator
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:id="@+id/pagerindicator_third"

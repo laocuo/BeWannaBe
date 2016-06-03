@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.tsdf.view.CustomizedView.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.doanything.view.CustomizedView.MyViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -35,4 +35,4 @@
         android:layout_marginRight="10dp"
         android:background="#123D05"
         android:text="TEST4"/>
-</com.example.tsdf.view.CustomizedView.MyViewGroup>
+</com.example.doanything.view.CustomizedView.MyViewGroup>

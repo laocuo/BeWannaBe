@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:customize="http://schemas.android.com/apk/res/com.example.tsdf"
+    xmlns:customize="http://schemas.android.com/apk/res/com.example.doanything"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.example.tsdf.view.CustomizedView.AudioControlView
+    <com.example.doanything.view.CustomizedView.AudioControlView
         android:id="@+id/audio_control_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

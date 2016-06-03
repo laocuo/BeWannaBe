@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 21
-    buildToolsVersion "22.0.0"
-
+    buildToolsVersion "21.1.2"
     defaultConfig {
-        applicationId "com.example.tsdf"
-        minSdkVersion 19
+        applicationId "com.example.doanything"
+        minSdkVersion 15
         targetSdkVersion 21
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -20,5 +20,6 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.0'
-    compile files('src/main/libs/nineoldandroids-2.4.0.jar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.nineoldandroids:library:2.4.0'
 }
