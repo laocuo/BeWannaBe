@@ -1,23 +1,18 @@
 
 package com.example.doanything.utils;
 
+import android.util.Log;
+
 import com.example.doanything.R;
 import com.example.doanything.view.fragment.AudioControlFragment;
-import com.example.doanything.view.fragment.BinarySlidingFragment;
+import com.example.doanything.view.fragment.BezerFragment;
 import com.example.doanything.view.fragment.CircleListFragment;
-import com.example.doanything.view.fragment.ContentFragment;
-//import com.example.doanything.view.fragment.ContentFragment;
-import com.example.doanything.view.fragment.GalleryShowFragment;
 import com.example.doanything.view.fragment.JingdongFragment;
-import com.example.doanything.view.fragment.MyViewGroupFragment;
 import com.example.doanything.view.fragment.NetEasyFragment;
-import com.example.doanything.view.fragment.ShowMatrixFragment;
-import com.example.doanything.view.fragment.ShowMatrixGalleryFragment;
-import com.example.doanything.view.fragment.SwipeRefreshListFragment;
 import com.example.doanything.view.fragment.ViewDragFragment;
 import com.example.doanything.view.fragment.ZoomViewFragment;
 
-import android.util.Log;
+//import com.example.doanything.view.fragment.ContentFragment;
 
 public class LogUtils {
     final static String TAG = "zhaocheng";
@@ -35,7 +30,8 @@ public class LogUtils {
             R.string.title_section3,
             R.string.title_section4,
             R.string.title_section5,
-            R.string.title_section6
+            R.string.title_section6,
+            R.string.title_section7
     };
 
     private static int[] mIconList = {
@@ -51,7 +47,8 @@ public class LogUtils {
             AudioControlFragment.class,
             ViewDragFragment.class,
             ZoomViewFragment.class,
-            CircleListFragment.class
+            CircleListFragment.class,
+            BezerFragment.class
     };
 
     public static int[] getStringList() {
